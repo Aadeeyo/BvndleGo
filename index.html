@@ -270,6 +270,10 @@ input[type=range]{width:100%;accent-color:var(--pink)}
 .act .ai{width:32px;height:32px;border-radius:10px;background:rgba(255,255,255,.18);display:grid;place-items:center;flex:none}
 .act .ai svg{width:18px;height:18px}
 .act .earn{margin-left:auto;font-family:var(--f-mono);font-size:12px;background:rgba(255,255,255,.2);padding:4px 10px;border-radius:999px}
+.rewards-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);align-items:center}
+.wallet{min-width:0}
+.act>span:not(.ai):not(.earn){min-width:0}
+.act .earn{flex:none;white-space:nowrap}
 .flycoin{position:fixed;z-index:30;width:22px;height:22px;pointer-events:none;left:0;top:0}
 
 /* corporate */
@@ -421,7 +425,7 @@ footer{background:var(--ink);padding-block:clamp(56px,8vw,100px) 36px}
 
 /* ---------- Responsive ---------- */
 @media (max-width:900px){
-  .hero .wrap,.phero .wrap,.feature .wrap,.corp .wrap,.why-grid,.formsec .wrap,.two{grid-template-columns:minmax(0,1fr)}
+  .rewards-grid,.hero .wrap,.phero .wrap,.feature .wrap,.corp .wrap,.why-grid,.formsec .wrap,.two{grid-template-columns:minmax(0,1fr)}
   .feature.flip .copy{order:0}
   .choose{grid-template-columns:minmax(0,1fr)}
   .svc{min-height:280px}
@@ -656,7 +660,7 @@ footer{background:var(--ink);padding-block:clamp(56px,8vw,100px) 36px}
   </section>
 
   <section class="sec rewards">
-    <div class="wrap feature" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);align-items:center">
+    <div class="wrap rewards-grid">
       <div class="copy rv">
         <span class="tag"><svg class="coin" style="width:22px;height:22px"><use href="#i-coin"/></svg>Rewards</span>
         <h2>Every time you Go, you get more.</h2>
