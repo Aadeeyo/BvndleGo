@@ -215,7 +215,7 @@ p{margin:0}
 .seg label{flex:1;position:relative;text-align:center;border-radius:999px;padding:9px 12px;font-size:14px;font-weight:600;cursor:pointer;color:var(--dim);transition:color .25s,background .25s}
 .seg input{position:absolute;opacity:0;pointer-events:none}
 .seg input:checked+span{color:var(--white)}
-.seg label:has(input:checked){background:var(--pink);color:var(--white)}
+.seg label:has(input:checked),.seg label.on{background:var(--pink);color:var(--white)}
 .seg label:has(input:focus-visible){outline:3px solid var(--pink-hi);outline-offset:2px}
 .mock-rows{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
 .mrow{border-radius:14px;background:rgba(255,255,255,.06);padding:10px 12px;min-width:0}
@@ -437,9 +437,18 @@ footer{background:var(--ink);padding-block:clamp(56px,8vw,100px) 36px}
   .hud.h2{right:-2%}
   .status-stack{width:62%}
 }
+/* Touch screens: hover effects play when the element is on screen instead */
+.touch .btn-go .wheel .blades{animation:spin 2.4s linear infinite}
+.touch .svc.live{transform:translateY(-6px) rotate(-.6deg);box-shadow:0 30px 60px -30px rgba(75,36,103,.8)}
+.touch .svc.live .arrow{transform:rotate(-45deg);background:var(--white);color:var(--purple)}
+.touch .corp-item.live{padding-left:12px;color:var(--pink)}
+.touch .card.live{transform:translateY(-4px);box-shadow:0 24px 40px -28px rgba(75,36,103,.6)}
+.svc,.corp-item,.card{transition-duration:.6s}
+/* Reduced motion: drop the big moves (page wipe, letter drop-in, scroll lifts); ambient loops stay, slowed */
 @media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   html{scroll-behavior:auto}
+  .mega .ch,.phero h1 .ln>span,.rv.in{animation:none}
+  .road,.skyline,.marquee-track,.ring-fg,.bus-run,.route::after,.hud,.wh{animation-duration:calc(var(--d,1)*3s)}
 }
 </style>
 </head>
@@ -942,7 +951,13 @@ footer{background:var(--ink);padding-block:clamp(56px,8vw,100px) 36px}
 
 <script>
 (() => {
-const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches; // only big motion (page wipe, parallax, smooth scroll)
+const TOUCH = matchMedia('(hover: none)').matches || 'ontouchstart' in window;
+const safe = (name, fn) => { try { fn(); } catch (e) { console.warn('[BvndleGo] ' + name + ' skipped:', e); } };
+if (window.CanvasRenderingContext2D && !CanvasRenderingContext2D.prototype.roundRect) {
+  CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) { r = Math.min(+r || 0, w / 2, h / 2); this.moveTo(x + r, y); this.arcTo(x + w, y, x + w, y + h, r); this.arcTo(x + w, y + h, x, y + h, r); this.arcTo(x, y + h, x, y, r); this.arcTo(x, y, x + w, y, r); this.closePath(); return this; };
+}
+let size = () => {}, howUpdate = () => {};
 const $ = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => [...r.querySelectorAll(s)];
 
@@ -983,7 +998,9 @@ const half = cues.map(c=>`<span>${c}<span class="wheel">${wheelSVG()}</span></sp
 $('#marq').innerHTML = half + half;
 
 /* ---------- Hero city canvas ---------- */
+safe('Hero city canvas', () => {
 const cv = $('#city'), ctx = cv.getContext('2d');
+const stage=$('#stage'), board=$('#board');
 const W = 1000, H = 760;
 function cr(pts, seg=24){ // catmull-rom sample
   const out=[];
@@ -1011,8 +1028,8 @@ const blocks=[]; for(let i=0;i<70;i++){blocks.push([rnd()*W,rnd()*500,20+rnd()*5
 const chargers=[[330,250],[700,250],[150,470],[870,470]];
 const vehicles=[]; roads.forEach((r,ri)=>{ const n= ri===5?2:3; for(let k=0;k<n;k++) vehicles.push({r,d:rnd()*r.len,v:(.7+rnd()*.9)*(rnd()>.5?1:-1),bus:rnd()<.35,trail:[]}); });
 
-function size(){ const dpr=Math.min(devicePixelRatio||1,2); const b=cv.getBoundingClientRect(); cv.width=Math.max(1,b.width*dpr); cv.height=Math.max(1,b.height*dpr); }
-size(); addEventListener('resize', size);
+size = () => { const dpr=Math.min(devicePixelRatio||1,2); const w=cv.clientWidth||cv.parentNode.offsetWidth, h=cv.clientHeight||cv.parentNode.offsetHeight; cv.width=Math.max(1,Math.round(w*dpr)); cv.height=Math.max(1,Math.round(h*dpr)); };
+size(); addEventListener('resize', () => size());
 let tick=0;
 function draw(){
   const cw=cv.width,ch=cv.height; const s=Math.max(cw/W,ch/H);
@@ -1035,7 +1052,7 @@ function draw(){
     ctx.fillStyle='#fff'; ctx.beginPath(); ctx.moveTo(c[0]+1.5,c[1]-8); ctx.lineTo(c[0]-5,c[1]+1); ctx.lineTo(c[0]-.5,c[1]+1); ctx.lineTo(c[0]-1.5,c[1]+8); ctx.lineTo(c[0]+5,c[1]-1); ctx.lineTo(c[0]+.5,c[1]-1); ctx.fill();});
   // vehicles
   vehicles.forEach(v=>{
-    if(!RM) v.d+=v.v*(v.bus?.9:1.6);
+    v.d+=v.v*(v.bus?.9:1.6)*(RM?.5:1);
     const [x,y,a]=at(v.r,v.d); const ang=v.v<0?a+Math.PI:a; const off=v.v<0?-6:6;
     const nx=x+Math.cos(a+Math.PI/2)*off, ny=y+Math.sin(a+Math.PI/2)*off;
     v.trail.push([nx,ny]); if(v.trail.length>(v.bus?14:22)) v.trail.shift();
@@ -1050,38 +1067,46 @@ function draw(){
 }
 let heroVisible=true;
 new IntersectionObserver(e=>heroVisible=e[0].isIntersecting).observe($('#stage'));
-function loop(){ if(heroVisible && !$('[data-view="home"]').hidden) draw(); if(!RM) requestAnimationFrame(loop); }
-draw(); loop();
+const homeView=$('[data-view="home"]');
+function loop(t){ if(heroVisible && !homeView.hidden){ draw(); if(TOUCH && !RM){ board.style.setProperty('--rz',(-22+Math.sin(t/2600)*7)+'deg'); board.style.setProperty('--rx',(48+Math.sin(t/3400)*5)+'deg'); } } requestAnimationFrame(loop); }
+requestAnimationFrame(loop);
 
 // tilt with pointer
-const stage=$('#stage'), board=$('#board');
-stage.addEventListener('pointermove',e=>{const b=stage.getBoundingClientRect(); const x=(e.clientX-b.left)/b.width-.5, y=(e.clientY-b.top)/b.height-.5; board.style.setProperty('--rz',(-22+x*14)+'deg'); board.style.setProperty('--rx',(48-y*14)+'deg');});
+stage.addEventListener('pointermove',e=>{ if(e.pointerType!=='mouse') return;const b=stage.getBoundingClientRect(); const x=(e.clientX-b.left)/b.width-.5, y=(e.clientY-b.top)/b.height-.5; board.style.setProperty('--rz',(-22+x*14)+'deg'); board.style.setProperty('--rx',(48-y*14)+'deg');});
 stage.addEventListener('pointerleave',()=>{board.style.removeProperty('--rz'); board.style.removeProperty('--rx');});
 // HUD ticks
 let eta=6, hp=64;
 setInterval(()=>{ hp = hp>=99?41:hp+1; $('#hudpct').textContent=hp; }, 900);
 setInterval(()=>{ eta = eta<=1?7:eta-1; $('#eta').textContent=eta; }, 3500);
+});
 
 /* ---------- GoCar mock ---------- */
+safe('GoCar mock', () => {
 const carShow=$('#carShow');
 $$('input[name="m-drive"]').forEach(r=>r.addEventListener('change',()=>{carShow.dataset.mode=r.value; const cb=$('.car-big',carShow); cb.animate([{transform:'translateX(-50%)'},{transform:'translateX(-46%) rotate(-2deg)'},{transform:'translateX(-50%)'}],{duration:500,easing:'ease-out'});}));
 const durLabels=['2 hours','4 hours','8 hours','12 hours','1 day','2 days','3 days','4 days','5 days','1 week','2 weeks','1 month'];
 const durR=$('#durRange'), durO=$('#durOut'); const setDur=()=>durO.textContent=durLabels[durR.value-1]; durR.addEventListener('input',setDur); setDur();
+});
 
 /* ---------- GoBus mock ---------- */
+safe('GoBus mock', () => {
 const bp=$('#busPath'), bpd=$('#busPathDone'), bd=$('#busDot'); const bl=bp.getTotalLength();
 bpd.style.strokeDasharray=bl; let bt=0;
-function busLoop(){ bt=(bt+ (RM?0:.0016))%1; const L=bt*bl; const p=bp.getPointAtLength(L); bd.setAttribute('transform',`translate(${p.x},${p.y})`); bpd.style.strokeDashoffset=bl-L;
+function busLoop(){ bt=(bt+.0016)%1; const L=bt*bl; const p=bp.getPointAtLength(L); bd.setAttribute('transform',`translate(${p.x},${p.y})`); bpd.style.strokeDashoffset=bl-L;
   const seg=bt*3%1; $('#busProg').style.width=(seg*100)+'%'; $('#busEta').textContent=Math.max(1,Math.ceil((1-seg)*4))+' min';
-  if(!RM) requestAnimationFrame(busLoop); }
+  requestAnimationFrame(busLoop); }
 busLoop();
+});
 
 /* ---------- GoCharge mock ---------- */
+safe('GoCharge mock', () => {
 const ring=$('#ringLive'), pct=$('#pctLive'); let cp=12;
 const setRing=()=>{ring.style.strokeDashoffset=440-440*cp/100; pct.textContent=cp+'%';};
 setRing(); setInterval(()=>{cp=cp>=100?12:cp+1; setRing();},260);
+});
 
 /* ---------- Rewards coins ---------- */
+safe('Rewards coins', () => {
 $$('[data-wallet]').forEach(w=>{
   const bal=$('[data-bal]',w); let val=+bal.textContent;
   const coinTarget=$('.balance .coin',w);
@@ -1091,7 +1116,7 @@ $$('[data-wallet]').forEach(w=>{
     for(let i=0;i<count;i++){
       const c=document.createElementNS('http://www.w3.org/2000/svg','svg'); c.setAttribute('class','flycoin'); c.innerHTML='<use href="#i-coin"/>'; document.body.appendChild(c);
       const sx=from.left+from.width/2-11, sy=from.top-11, tx=to.left+to.width/2-11, ty=to.top+to.height/2-11; const mx=(sx+tx)/2+(Math.random()-.5)*120, my=Math.min(sy,ty)-60-Math.random()*60;
-      const a=c.animate([{transform:`translate(${sx}px,${sy}px) scale(.4)`,opacity:0},{transform:`translate(${mx}px,${my}px) scale(1.1) rotate(180deg)`,opacity:1,offset:.5},{transform:`translate(${tx}px,${ty}px) scale(.6) rotate(360deg)`,opacity:.9}],{duration:RM?1:900+i*60,delay:RM?0:i*70,easing:'cubic-bezier(.5,0,.3,1)'});
+      const a=c.animate([{transform:`translate(${sx}px,${sy}px) scale(.4)`,opacity:0},{transform:`translate(${mx}px,${my}px) scale(1.1) rotate(180deg)`,opacity:1,offset:.5},{transform:`translate(${tx}px,${ty}px) scale(.6) rotate(360deg)`,opacity:.9}],{duration:900+i*60,delay:i*70,easing:'cubic-bezier(.5,0,.3,1)'});
       a.onfinish=()=>{c.remove(); val+=n/count; bal.textContent=Math.round(val); bal.parentElement.classList.remove('bump'); void bal.offsetWidth; bal.parentElement.classList.add('bump');};
     }
   }
@@ -1099,31 +1124,38 @@ $$('[data-wallet]').forEach(w=>{
   // ambient earning while visible
   let vis=false; new IntersectionObserver(e=>vis=e[0].isIntersecting,{threshold:.5}).observe(w);
   const acts=$$('[data-earn]',w); let k=0;
-  if(!RM) setInterval(()=>{ if(vis && !w.closest('.view').hidden && document.visibilityState==='visible'){ fly(acts[k++%acts.length]); } },2600);
+  setInterval(()=>{ if(vis && !w.closest('.view').hidden && document.visibilityState==='visible'){ fly(acts[k++%acts.length]); } },2600);
+});
 });
 
 /* ---------- How it works road ---------- */
+safe('How it works road', () => {
 const hp_=$('#howPath'), hd=$('#howDone'), hc=$('#howCar'); const hl=hp_.getTotalLength(); hd.style.strokeDasharray=hl;
 const marks=$('#howMarks'); [0,.25,.5,.75,1].forEach((f,i)=>{const p=hp_.getPointAtLength(f*hl); marks.insertAdjacentHTML('beforeend',`<circle cx="${p.x}" cy="${p.y}" r="10" fill="#fff" stroke="#E93C8E" stroke-width="4"/>`);});
-function howUpdate(){ const el=$('#howRoad'); const b=el.getBoundingClientRect(); const vh=innerHeight; let f=(vh*.85-b.top)/(vh*.7); f=Math.max(0,Math.min(1,f)); if(RM) f=1; const p=hp_.getPointAtLength(f*hl); hc.setAttribute('transform',`translate(${p.x},${p.y})`); hd.style.strokeDashoffset=hl-f*hl; }
-addEventListener('scroll',howUpdate,{passive:true}); howUpdate();
+howUpdate = () => { const el=$('#howRoad'); const b=el.getBoundingClientRect(); const vh=innerHeight; let f=(vh*.85-b.top)/(vh*.7); f=Math.max(0,Math.min(1,f)); const p=hp_.getPointAtLength(f*hl); hc.setAttribute('transform',`translate(${p.x},${p.y})`); hd.style.strokeDashoffset=hl-f*hl; };
+addEventListener('scroll',()=>howUpdate(),{passive:true}); howUpdate();
+});
 
 /* ---------- Business orbit ---------- */
+safe('Business orbit', () => {
 const orbit=$('#orbit');
 orbit.outerHTML=`<svg viewBox="0 0 400 400" style="position:relative;width:86%;height:86%" aria-hidden="true">
   <circle cx="200" cy="200" r="150" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="2" stroke-dasharray="4 10"/>
   <circle cx="200" cy="200" r="95" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="2"/>
   <g transform="translate(150 150) scale(1)">${wheelSVG().replace('<svg ','<svg width="100" height="100" ')}</g>
-  <g><animateTransform attributeName="transform" type="rotate" from="0 200 200" to="360 200 200" dur="${RM?0:18}s" repeatCount="indefinite"/>
-    ${[['i-bus',0],['i-car',120],['i-bolt',240]].map(([ic,a])=>{const r=a*Math.PI/180; const x=200+150*Math.cos(r), y=200+150*Math.sin(r); return `<g transform="translate(${x} ${y})"><g><animateTransform attributeName="transform" type="rotate" from="0" to="-360" dur="${RM?0:18}s" repeatCount="indefinite"/><circle r="30" fill="#E93C8E"/><use href="#${ic}" x="-14" y="-14" width="28" height="28" style="color:#fff"/></g></g>`;}).join('')}
+  <g><animateTransform attributeName="transform" type="rotate" from="0 200 200" to="360 200 200" dur="18s" repeatCount="indefinite"/>
+    ${[['i-bus',0],['i-car',120],['i-bolt',240]].map(([ic,a])=>{const r=a*Math.PI/180; const x=200+150*Math.cos(r), y=200+150*Math.sin(r); return `<g transform="translate(${x} ${y})"><g><animateTransform attributeName="transform" type="rotate" from="0" to="-360" dur="18s" repeatCount="indefinite"/><circle r="30" fill="#E93C8E"/><use href="#${ic}" x="-14" y="-14" width="28" height="28" style="color:#fff"/></g></g>`;}).join('')}
   </g>
-  <g><animateTransform attributeName="transform" type="rotate" from="360 200 200" to="0 200 200" dur="${RM?0:11}s" repeatCount="indefinite"/>
+  <g><animateTransform attributeName="transform" type="rotate" from="360 200 200" to="0 200 200" dur="11s" repeatCount="indefinite"/>
     ${[['i-people',60],['i-route',180],['i-radar',300]].map(([ic,a])=>{const r=a*Math.PI/180; const x=200+95*Math.cos(r), y=200+95*Math.sin(r); return `<g transform="translate(${x} ${y})"><circle r="20" fill="#fff"/><use href="#${ic}" x="-10" y="-10" width="20" height="20" style="color:#4B2467"/></g>`;}).join('')}
   </g>
 </svg>`;
+});
 
 /* ---------- About belief ---------- */
+safe('About belief', () => {
 const bel=$$('#belief .e'); let bi=0; setInterval(()=>{bel.forEach((e,i)=>e.classList.toggle('on',i===bi)); bi=(bi+1)%bel.length;},1400);
+});
 
 /* ---------- FAQs ---------- */
 const FAQ=[
@@ -1263,19 +1295,21 @@ $('#drawerClose').addEventListener('click',closeDrawer);
 
 /* ---------- View routing with wheel wipe ---------- */
 const VIEWS=$$('[data-view]').map(v=>v.dataset.view); let current='home';
-function setView(name){ $$('[data-view]').forEach(v=>v.hidden=v.dataset.view!==name); current=name; $$('.nav a').forEach(a=>a.toggleAttribute('aria-current',a.dataset.go===name)); $$('.nav a[aria-current]').forEach(a=>a.setAttribute('aria-current','page')); scrollTo(0,0); if(name==='home'){ size(); } howUpdate(); observeReveal(); }
+function setView(name){ $$('[data-view]').forEach(v=>v.hidden=v.dataset.view!==name); current=name; $$('.nav a').forEach(a=>a.toggleAttribute('aria-current',a.dataset.go===name)); $$('.nav a[aria-current]').forEach(a=>a.setAttribute('aria-current','page')); scrollTo(0,0); try{ if(name==='home') size(); howUpdate(); }catch(_){} observeReveal(); }
 function go(name,x,y){
   if(!VIEWS.includes(name)) name='home';
   closeDrawer();
   if(name===current){ scrollTo({top:0,behavior:RM?'auto':'smooth'}); return; }
   try{ history.replaceState(null,'','#'+name); }catch(_){}
-  if(RM){ setView(name); return; }
+  if(RM || !Element.prototype.animate){ setView(name); return; }
+  try {
   const w=$('#wipe'); const cx=x??innerWidth/2, cy=y??innerHeight/2; const from=`circle(0px at ${cx}px ${cy}px)`, to=`circle(150vmax at ${cx}px ${cy}px)`;
   $('.wheel',w).animate([{transform:'rotate(0) scale(.4)'},{transform:'rotate(540deg) scale(1)'}],{duration:900,easing:'ease-out'});
   w.animate([{clipPath:from},{clipPath:to}],{duration:420,easing:'cubic-bezier(.7,0,.3,1)',fill:'forwards'}).onfinish=()=>{
     setView(name);
     w.animate([{clipPath:`circle(150vmax at 50% 50%)`},{clipPath:`circle(0px at 50% 50%)`}],{duration:480,delay:120,easing:'cubic-bezier(.7,0,.3,1)',fill:'forwards'});
   };
+  } catch(e){ setView(name); }
 }
 document.addEventListener('click',e=>{
   const mv=e.target.closest('[data-move]'); if(mv){ e.preventDefault(); return openRouter(mv.dataset.move||''); }
@@ -1288,6 +1322,21 @@ document.addEventListener('click',e=>{
 let io;
 function observeReveal(){ io&&io.disconnect(); io=new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} }),{rootMargin:'0px 0px -8% 0px'});
   $$('.view:not([hidden]) .rv:not(.in)').forEach(el=>{ const b=el.getBoundingClientRect(); if(b.top<innerHeight) el.classList.add('in'); else io.observe(el); }); }
+
+/* ---------- Segmented controls (no :has() needed) ---------- */
+const syncSeg = (root=document) => $$('.seg label',root).forEach(l=>{ const i=l.querySelector('input'); l.classList.toggle('on', !!(i&&i.checked)); });
+document.addEventListener('change', e => { if(e.target.closest('.seg')) syncSeg(); });
+new MutationObserver(()=>syncSeg()).observe(document.body,{childList:true,subtree:true});
+syncSeg();
+
+/* ---------- Touch: bring hover-only motion to phones ---------- */
+if (TOUCH) {
+  document.documentElement.classList.add('touch');
+  safe('touch cards', () => {
+    const tio = new IntersectionObserver(es => es.forEach(en => en.target.classList.toggle('live', en.isIntersecting)), { threshold: .6 });
+    $$('.svc, .corp-item, .card').forEach(el => tio.observe(el));
+  });
+}
 
 /* ---------- Boot ---------- */
 const start=(location.hash||'').slice(1);
