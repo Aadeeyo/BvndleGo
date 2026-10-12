@@ -3,8 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="BvndleGo — cars, buses and EV charging in one connected experience. Move Better.">
-<title>BvndleGo</title>
+<meta name="description" content="Book an electric car, find your commute, or explore EV charging, with rewards on eligible journeys. Starting in Lagos.">
+<meta name="theme-color" content="#26103A">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BvndleGo">
+<meta property="og:title" content="BvndleGo · Your everyday mobility, made easier">
+<meta property="og:description" content="Book an electric car, find your commute, or explore EV charging, with rewards on eligible journeys. Starting in Lagos.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23E93C8E'/%3E%3Cg fill='%23fff'%3E%3Cpath d='M50 50C54 38 60 24 57 9L47 8C49 22 47 36 50 50Z' transform='rotate(45 50 50)'/%3E%3Cpath d='M50 50C54 38 60 24 57 9L47 8C49 22 47 36 50 50Z' transform='rotate(135 50 50)'/%3E%3Cpath d='M50 50C54 38 60 24 57 9L47 8C49 22 47 36 50 50Z' transform='rotate(225 50 50)'/%3E%3Cpath d='M50 50C54 38 60 24 57 9L47 8C49 22 47 36 50 50Z' transform='rotate(315 50 50)'/%3E%3C/g%3E%3C/svg%3E">
+<title>BvndleGo · Electric car hire, bus routes and EV charging</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
@@ -454,6 +461,154 @@ footer{background:var(--ink);padding-block:clamp(56px,8vw,100px) 36px}
   .mega .ch,.phero h1 .ln>span,.rv.in{animation:none}
   .road,.skyline,.marquee-track,.ring-fg,.bus-run,.route::after,.hud,.wh{animation-duration:calc(var(--d,1)*3s)}
 }
+
+/* ===================== v2: conversion-led additions ===================== */
+.avail-note{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:600;padding:8px 14px 8px 12px;border-radius:999px;background:rgba(124,242,176,.09);color:#C2F9DB;border:1px solid rgba(124,242,176,.28)}
+.avail-note i{width:8px;height:8px;border-radius:50%;background:#7CF2B0;animation:ping 1.6s infinite;flex:none}
+.light .avail-note{background:rgba(75,36,103,.06);color:var(--purple);border-color:rgba(75,36,103,.18)}
+.hl{font-size:clamp(42px,6.2vw,88px);font-weight:900;letter-spacing:-.04em;line-height:.96;margin-top:22px}
+.hl .wd{display:inline-block;animation:rise .9s cubic-bezier(.2,.9,.25,1.15) both;animation-delay:calc(var(--i)*70ms + 100ms)}
+.hl .pk{color:var(--pink-hi)}
+.hero .lead{margin-top:22px}
+.biz-link{display:inline-flex;align-items:center;gap:10px;margin-top:26px;font-weight:700;text-decoration:none;padding:10px 0;border-bottom:2px solid rgba(233,60,142,.5)}
+.biz-link svg{width:18px;height:18px;transition:transform .3s}
+.biz-link:hover svg{transform:translateX(4px)}
+.hero-right{position:relative;padding-top:clamp(120px,14vw,180px);min-width:0}
+.hero-right .stage{position:absolute;inset:-4% -10% 8% -6%;height:auto;z-index:0}
+.hero-right .hud{z-index:1}
+.hud.h1{top:2%;left:4%}.hud.h2{top:18%;right:2%}.hud.h3{display:none}
+.illus{position:absolute;z-index:2;font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:5px 9px;border-radius:999px;background:rgba(23,8,36,.7);color:var(--dim);border:1px solid var(--hair);pointer-events:none}
+.light .illus{background:rgba(255,255,255,.8);color:var(--ink-dim);border-color:var(--lilac-2)}
+
+/* booking widget */
+.bw{position:relative;z-index:3;background:rgba(23,8,36,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--hair);border-radius:28px;padding:16px;box-shadow:0 50px 90px -40px rgba(0,0,0,.9)}
+.bw-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;background:rgba(255,255,255,.06);padding:5px;border-radius:20px}
+.bw-tab{border:0;background:none;border-radius:15px;padding:10px 4px;font-weight:700;font-size:13px;line-height:1.2;color:var(--dim);display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;transition:background .25s,color .25s}
+.bw-tab svg{width:22px;height:22px}
+.bw-tab:hover{color:var(--white)}
+.bw-tab[aria-selected="true"]{background:var(--pink);color:var(--white)}
+.bw-pane{margin-top:14px}
+.bw .fgrid{gap:10px 12px}
+.bw-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px}
+.bw-foot small{color:var(--dim);font-size:12.5px;max-width:30ch}
+.bw .fld input{padding:11px 13px}
+
+/* journey cards */
+.journey{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:48px}
+.jc{border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;background:var(--white);border:1px solid var(--lilac-2);transition:transform .35s cubic-bezier(.2,.9,.3,1.2),box-shadow .35s}
+.jc:hover,.touch .jc.live{transform:translateY(-6px);box-shadow:0 30px 60px -34px rgba(75,36,103,.7)}
+.jc .scene-box{position:relative;height:200px;overflow:hidden}
+.jc .scene-box .scene{inset:0}
+.jc .jb{padding:22px;display:flex;flex-direction:column;gap:12px;flex:1}
+.jc h3{font-size:26px}
+.jc .out{color:var(--ink-dim);font-weight:600}
+.dots{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.dots li{display:flex;gap:10px;align-items:baseline;color:var(--ink-text)}
+.dots li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--pink);flex:none;transform:translateY(-2px)}
+.dark .dots li,.fpanel .dots li{color:var(--white)}
+.jc .btn-row{margin-top:auto;padding-top:10px}
+.jc .btn{padding:12px 18px 12px 12px;font-size:14px}
+.jc .btn-ghost{padding:12px 16px}
+.jc .scene-box .car-run{width:56%}
+.jc .scene-box .ring-wrap{width:140px;height:140px;top:50%}
+
+/* business use cases */
+.ucs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:44px}
+.uc{position:relative;border-radius:var(--r);padding:22px;background:rgba(255,255,255,.05);border:1px solid var(--hair);text-decoration:none;display:flex;flex-direction:column;gap:12px;min-height:250px;transition:background .3s,border-color .3s,transform .3s}
+.uc:hover,.touch .uc.live{background:rgba(233,60,142,.12);border-color:rgba(233,60,142,.5);transform:translateY(-4px)}
+.uc .ui{width:48px;height:48px;border-radius:16px;background:var(--pink);display:grid;place-items:center}
+.uc .ui svg{width:26px;height:26px;color:var(--white)}
+.uc h3{font-size:19px;letter-spacing:-.01em}
+.uc p{color:var(--dim);font-size:15px}
+.uc .more{margin-top:auto;font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:8px;color:var(--pink-hi)}
+.uc .more svg{width:16px;height:16px;transition:transform .3s}
+.uc:hover .more svg{transform:translateX(4px)}
+
+/* process */
+.proc{list-style:none;padding:0;margin:36px 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;position:relative}
+.proc::before{content:"";position:absolute;left:24px;right:24px;top:23px;height:3px;background:rgba(75,36,103,.14);border-radius:3px}
+.proc::after{content:"";position:absolute;left:24px;right:24px;top:23px;height:3px;background:var(--pink);border-radius:3px;transform-origin:left;transform:scaleX(0);animation:fillr 3.2s .4s cubic-bezier(.6,0,.3,1) forwards}
+.dark .proc::before{background:var(--hair)}
+.proc li{position:relative;z-index:1;display:grid;gap:10px;align-content:start}
+.proc .pn{width:48px;height:48px;border-radius:50%;background:var(--purple);color:var(--white);display:grid;place-items:center;font-family:var(--f-mono);font-weight:700;border:3px solid var(--lilac)}
+.dark .proc .pn{border-color:var(--plum);background:var(--pink)}
+.proc b{font-family:var(--f-display);font-size:17px;letter-spacing:-.01em}
+.proc p{color:var(--ink-dim);font-size:15px}
+.dark .proc p{color:var(--dim)}
+
+/* problem / model */
+.pm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.pm-card{border-radius:var(--r);padding:28px;background:var(--white);border:1px solid var(--lilac-2);display:grid;gap:10px;align-content:start}
+.pm-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--pink)}
+.pm-card p{font-family:var(--f-display);font-weight:700;font-size:clamp(20px,2.2vw,26px);letter-spacing:-.02em;line-height:1.2;color:var(--ink-text)}
+
+/* rewards explainer */
+.example{list-style:none;padding:0;margin:28px 0 0;display:grid;gap:0;counter-reset:ex}
+.example li{counter-increment:ex;display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start;padding:14px 0;border-bottom:1px solid var(--hair);color:var(--dim)}
+.example li b{color:var(--white);display:block;font-size:16px}
+.example li::before{content:counter(ex);width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:rgba(233,60,142,.2);color:var(--pink-hi);font-family:var(--f-mono);font-weight:700;font-size:13px}
+.qa{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px;margin-top:40px}
+.qa div{border-radius:20px;padding:22px;background:var(--white);border:1px solid var(--lilac-2);display:grid;gap:8px;align-content:start}
+.qa b{font-family:var(--f-display);font-size:17px;letter-spacing:-.01em;color:var(--ink-text)}
+.qa p{color:var(--ink-dim)}
+.qa .qn{font-family:var(--f-mono);font-size:11px;color:var(--pink);letter-spacing:.12em}
+.fineprint{font-size:13px;color:var(--dim);margin-top:14px}
+.light .fineprint{color:var(--ink-dim)}
+
+/* trust */
+.trust{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:44px}
+.tcard{border-radius:20px;padding:22px;background:var(--white);border:1px solid var(--lilac-2);display:grid;gap:8px;align-content:start}
+.tcard .ci{width:42px;height:42px;border-radius:14px;background:var(--lilac);display:grid;place-items:center;color:var(--pink)}
+.tcard .ci svg{width:22px;height:22px}
+.tcard b{font-size:17px;color:var(--ink-text)}
+.tcard p{color:var(--ink-dim);font-size:15px}
+.cover{margin-top:16px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:14px}
+.cover>div{border-radius:20px;padding:24px;background:var(--purple);color:var(--white);display:grid;gap:10px;align-content:start}
+.cover>div:last-child{background:var(--ink)}
+.cover h3{font-size:22px}
+.cover p{color:var(--dim)}
+.support-list{display:grid;gap:8px;margin-top:4px}
+.support-list div{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 0;border-bottom:1px solid var(--hair);font-weight:600}
+.support-list span{color:var(--dim);font-weight:500}
+
+/* spec preview (what a station / route will show) */
+.spec{position:relative;border-radius:28px;background:linear-gradient(180deg,#351853,#26103A);border:1px solid var(--hair);padding:24px;color:var(--white)}
+.spec h3{font-size:20px;margin-bottom:6px}
+.spec .lead{font-size:15px}
+.spec-list{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px}
+.spec-list li{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.06);font-weight:600}
+.spec-list svg{width:20px;height:20px;color:var(--pink-hi);flex:none}
+.spec-list span{margin-left:auto;font-family:var(--f-mono);font-size:11px;color:var(--dim);letter-spacing:.08em}
+.note{border-radius:18px;padding:16px 18px;background:rgba(233,60,142,.12);border:1px solid rgba(233,60,142,.35);display:flex;gap:12px;align-items:flex-start;font-size:15px}
+.light .note{background:rgba(233,60,142,.07);color:var(--ink-text)}
+.note svg{width:20px;height:20px;color:var(--pink);flex:none;margin-top:2px}
+
+/* faq tabs */
+.ftabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.ftab{border:1px solid var(--lilac-2);background:var(--white);border-radius:999px;padding:9px 16px;font-weight:600;font-size:14px;color:var(--ink-text)}
+.ftab[aria-pressed="true"]{background:var(--purple);border-color:var(--purple);color:var(--white)}
+.faq-cat{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--pink);margin:22px 0 4px}
+
+.final .btn-row{justify-content:center}
+.done ol{margin:0;padding-left:20px;display:grid;gap:6px;color:var(--dim)}
+.done ol b{color:var(--white)}
+.r-opt small{line-height:1.3}
+
+@media (max-width:1100px){.ucs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){
+  .journey,.trust,.cover,.pm-grid{grid-template-columns:minmax(0,1fr)}
+  .proc{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .proc::before,.proc::after{display:none}
+  .hero-right{padding-top:110px}
+  .hero-right .stage{inset:-2% -14% 30% -14%}
+}
+@media (max-width:560px){
+  .ucs,.proc{grid-template-columns:minmax(0,1fr)}
+  .bw-tab{font-size:12px}
+  .hero-right .hud{display:none}
+  .hero-right{padding-top:96px}
+  .hero-right .stage{inset:-4% -20% 40% -20%}
+}
 </style>
 </head>
 <body>
@@ -478,6 +633,15 @@ footer{background:var(--ink);padding-block:clamp(56px,8vw,100px) 36px}
     <symbol id="i-compass" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></g></symbol>
     <symbol id="i-cal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></g></symbol>
     <symbol id="i-plug" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0zM12 17v4"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></g></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g></symbol>
+    <symbol id="i-cash" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 9v.01M18 15v.01" stroke-linecap="round"/></g></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z M9 12l2 2 4-4"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M4 5h16v11H9l-5 4z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></g></symbol>
+    <symbol id="i-seat" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 4v9h9l2 7M7 13l-1 7M10 9h5"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 21V4h11l-2 4 2 4H5"/></symbol>
   </defs>
 </svg>
 
@@ -493,7 +657,7 @@ footer{background:var(--ink);padding-block:clamp(56px,8vw,100px) 36px}
       <a href="#about" data-go="about">About</a>
       <a href="#faqs" data-go="faqs">FAQs</a>
     </nav>
-    <button class="btn btn-go" data-move><span class="wheel" data-wheel></span>Move Better</button>
+    <button class="btn btn-go" data-move><span class="wheel" data-wheel></span>Start a request</button>
     <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span></button>
   </div>
 </header>
@@ -507,7 +671,7 @@ footer{background:var(--ink);padding-block:clamp(56px,8vw,100px) 36px}
   <a href="#rewards" data-go="rewards">Rewards</a>
   <a href="#about" data-go="about">About</a>
   <a href="#faqs" data-go="faqs">FAQs</a>
-  <button class="btn btn-go" data-move><span class="wheel" data-wheel></span>Move Better</button>
+  <button class="btn btn-go" data-move><span class="wheel" data-wheel></span>Start a request</button>
 </div>
 
 <main id="main">
@@ -517,180 +681,70 @@ footer{background:var(--ink);padding-block:clamp(56px,8vw,100px) 36px}
   <section class="hero">
     <div class="wrap">
       <div>
-        <h1 class="mega" aria-label="Move Better.">
-          <span class="w" aria-hidden="true"><span class="ch" style="--i:0">M</span><span class="ch" style="--i:1"><span class="wheel spin-slow" data-wheel></span></span><span class="ch" style="--i:2">V</span><span class="ch" style="--i:3">E</span></span>
-          <span class="w" aria-hidden="true"><span class="ch" style="--i:5">B</span><span class="ch" style="--i:6">E</span><span class="ch" style="--i:7">T</span><span class="ch" style="--i:8">T</span><span class="ch" style="--i:9">E</span><span class="ch" style="--i:10">R</span><span class="ch dot" style="--i:11">.</span></span>
-        </h1>
-        <p class="lead">Cars when you need them. Buses you can rely on. Charging when you need power. BvndleGo brings modern mobility together in one connected experience.</p>
-        <div class="btn-row">
-          <button class="btn btn-go" data-move><span class="wheel" data-wheel></span>Move Better</button>
-          <a class="btn btn-ghost" href="#choose" data-scroll="choose">Explore GoCar, GoBus &amp; GoCharge</a>
-        </div>
+        <span class="avail-note"><i></i><span data-coverage>Starting in Lagos</span></span>
+        <h1 class="hl"><span class="wd" style="--i:0">Your</span> <span class="wd" style="--i:1">everyday</span> <span class="wd" style="--i:2">mobility,</span> <span class="wd pk" style="--i:3">made</span> <span class="wd pk" style="--i:4">easier.</span></h1>
+        <p class="lead">Book an electric car, find your commute, or explore EV charging, with rewards on eligible journeys.</p>
+        <a class="biz-link" href="#business" data-go="business"><svg><use href="#i-brief"/></svg>Business Mobility Solutions<svg><use href="#i-arrow"/></svg></a>
       </div>
-      <div class="stage" id="stage" aria-hidden="true">
-        <div class="board" id="board"><canvas id="city"></canvas></div>
-        <div class="hud h1"><span class="ico"><svg><use href="#i-bus"/></svg></span><div><b>GoBus</b><small>On route · ETA <span id="eta">6</span> min</small></div><span class="live"></span></div>
-        <div class="hud h2"><span class="ico"><svg><use href="#i-car"/></svg></span><div><b>GoCar</b><small>Ready for pickup</small></div></div>
-        <div class="hud h3"><span class="ico"><svg><use href="#i-bolt"/></svg></span><div><b>GoCharge</b><small>Charging · <span id="hudpct">64</span>%</small></div><span class="live"></span></div>
+      <div class="hero-right">
+        <div class="stage" id="stage" aria-hidden="true">
+          <div class="board" id="board"><canvas id="city"></canvas></div>
+          <div class="hud h1"><span class="ico"><svg><use href="#i-bus"/></svg></span><div><b>GoBus</b><small>Commutes &amp; staff shuttles</small></div></div>
+          <div class="hud h2"><span class="ico"><svg><use href="#i-bolt"/></svg></span><div><b>GoCharge</b><small>Driver &amp; fleet charging</small></div></div>
+          <div class="hud h3"></div>
+        </div>
+        <form class="bw" id="bw" novalidate aria-label="Start a booking or enquiry">
+          <div class="bw-tabs" role="tablist">
+            <button type="button" class="bw-tab" role="tab" data-tab="car" aria-selected="true"><svg><use href="#i-car"/></svg>Book a Car</button>
+            <button type="button" class="bw-tab" role="tab" data-tab="bus" aria-selected="false"><svg><use href="#i-bus"/></svg>Find My Bus Route</button>
+            <button type="button" class="bw-tab" role="tab" data-tab="charge" aria-selected="false"><svg><use href="#i-bolt"/></svg>Find EV Charging</button>
+          </div>
+          <div class="bw-pane" id="bwPane"></div>
+          <div class="bw-foot"><small id="bwNote"></small><button class="btn btn-go" type="submit" id="bwGo"><span class="wheel" data-wheel></span><span>Request a Car</span></button></div>
+        </form>
       </div>
     </div>
   </section>
+
+  <div class="marquee" aria-label="Electric mobility, Technology-led, Cashless, Trackable, Rewarding" style="margin-top:0">
+    <div class="marquee-track" id="marq" aria-hidden="true"></div>
+  </div>
 
   <section class="sec light" id="choose">
     <div class="wrap">
       <div class="sec-head center rv">
+        <span class="eyebrow">Choose your journey</span>
         <h2>Where do you want to go from here?</h2>
         <p class="lead">Choose what you need. We will take care of the rest.</p>
       </div>
-      <div class="choose">
-        <a class="svc svc-car rv" href="#gocar" data-go="gocar">
-          <div class="scene"><div class="skyline"></div><div class="road"></div><div class="car-run" data-car></div></div>
-          <span class="arrow"><svg width="20" height="20"><use href="#i-arrow"/></svg></span>
-          <h3>GoCar</h3><p>Get a car.</p>
-        </a>
-        <a class="svc svc-bus rv" href="#gobus" data-go="gobus">
-          <div class="scene"><div class="route"></div><span class="stop" style="left:10%;top:46%"></span><span class="stop" style="left:36.6%;top:46%"></span><span class="stop" style="left:63.3%;top:46%"></span><span class="stop" style="left:90%;top:46%"></span><div class="bus-run" data-bus></div></div>
-          <span class="arrow"><svg width="20" height="20"><use href="#i-arrow"/></svg></span>
-          <h3>GoBus</h3><p>Get a seat or move your team.</p>
-        </a>
-        <a class="svc svc-charge rv" href="#gocharge" data-go="gocharge">
-          <div class="scene"><div class="ring-wrap"><svg viewBox="0 0 160 160"><circle class="ring-bg" cx="80" cy="80" r="70"/><circle class="ring-fg" cx="80" cy="80" r="70"/></svg><div class="bolt"><svg style="color:#FF73B3"><use href="#i-bolt"/></svg></div></div></div>
-          <span class="arrow"><svg width="20" height="20"><use href="#i-arrow"/></svg></span>
-          <h3>GoCharge</h3><p>Find power.</p>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec why">
-    <div class="wrap why-grid">
-      <h2 class="rv" style="font-size:clamp(38px,6vw,80px)">Movement should not be this hard.</h2>
-      <p class="lead rv">Your day should not depend on uncertain transport, hidden costs or finding somewhere to charge. BvndleGo uses electric vehicles, digital booking, scheduling, tracking and rewards to make movement simpler and more predictable.</p>
-    </div>
-    <div class="marquee" aria-label="Electric mobility, Technology-led, Cashless, Trackable, Rewarding">
-      <div class="marquee-track" id="marq" aria-hidden="true"></div>
-    </div>
-  </section>
-
-  <section class="sec feature">
-    <div class="wrap">
-      <div class="copy rv">
-        <span class="tag"><span class="wheel" data-wheel></span>GoCar</span>
-        <h2>A car when you need one.</h2>
-        <p class="lead">Book an electric car for the hours or days you need. Choose self-drive or request a driver, see the essentials upfront and get moving.</p>
-        <button class="btn btn-go" data-move="car"><span class="wheel" data-wheel></span>Book GoCar</button>
-      </div>
-      <div class="mock rv" aria-label="Example GoCar booking screen">
-        <div class="mock-bar"><span>GoCar · Booking</span><span class="pill"><i></i>Electric</span></div>
-        <div class="car-show" id="carShow" data-mode="driver"><div class="floor"></div><div class="car-big" data-car="driver"></div></div>
-        <div class="seg" role="radiogroup" aria-label="Drive mode" style="margin-top:14px">
-          <label><input type="radio" name="m-drive" id="m-self" value="self"><span>Self-drive</span></label>
-          <label><input type="radio" name="m-drive" id="m-driver" value="driver" checked><span>With driver</span></label>
-        </div>
-        <div class="dur">
-          <div class="dur-top"><span>How long do you need it?</span><b id="durOut">1 day</b></div>
-          <input type="range" id="durRange" min="1" max="12" value="5" aria-label="Hire duration">
-        </div>
-        <div class="mock-rows">
-          <div class="mrow"><small>Pickup</small><b>Your location</b></div>
-          <div class="mrow"><small>Vehicle</small><b>EV</b></div>
-          <div class="mrow"><small>Rewards</small><b>+ Bvndle Coins</b></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec feature flip light">
-    <div class="wrap">
-      <div class="copy rv">
-        <span class="tag"><span class="wheel" data-wheel></span>GoBus</span>
-        <h2>A commute you can build your day around.</h2>
-        <p class="lead">Reserve a seat for your daily route or let BvndleGo manage dependable staff transportation for your organisation.</p>
-        <div class="btn-row">
-          <button class="btn btn-go" data-move="bus:Me"><span class="wheel" data-wheel></span>Find a Bus</button>
-          <button class="btn btn-ghost" data-move="bus:My employees">Plan Staff Transport</button>
-        </div>
-      </div>
-      <div class="mock rv" aria-label="Example GoBus live route">
-        <div class="mock-bar"><span>GoBus · Live route</span><span class="pill"><i></i>Tracking</span></div>
-        <div class="map-mini">
-          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
-            <g stroke="rgba(255,255,255,.06)" stroke-width="1">
-              <path d="M0 60H400M0 130H400M0 200H400M0 260H400M70 0V300M160 0V300M250 0V300M330 0V300"/>
-            </g>
-            <path d="M0 250 C 80 240 120 290 220 280 S 360 250 400 270 V300 H0Z" fill="rgba(107,60,145,.45)"/>
-            <path id="busPath" d="M30 230 C 70 150 120 200 160 140 S 240 60 300 90 S 360 60 380 40" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="10" stroke-linecap="round"/>
-            <path id="busPathDone" d="M30 230 C 70 150 120 200 160 140 S 240 60 300 90 S 360 60 380 40" fill="none" stroke="#E93C8E" stroke-width="4" stroke-linecap="round"/>
-            <g fill="#fff"><circle cx="30" cy="230" r="6"/><circle cx="160" cy="140" r="6"/><circle cx="300" cy="90" r="6"/><circle cx="380" cy="40" r="6"/></g>
-            <g id="busDot"><circle r="16" fill="rgba(233,60,142,.3)"><animate attributeName="r" values="12;20;12" dur="1.6s" repeatCount="indefinite"/></circle><circle r="9" fill="#E93C8E" stroke="#fff" stroke-width="3"/></g>
-          </svg>
-          <div class="status-stack">
-            <div class="status"><small>Seat</small><b>Reserved</b></div>
-            <div class="status"><small>Next stop in</small><b id="busEta">4 min</b><div class="prog"><i id="busProg"></i></div></div>
+      <div class="journey">
+        <article class="jc rv">
+          <div class="scene-box svc-car"><div class="scene"><div class="skyline"></div><div class="road"></div><div class="car-run" data-car></div></div></div>
+          <div class="jb">
+            <span class="tag" style="align-self:flex-start"><span class="wheel" data-wheel></span>GoCar</span>
+            <h3>A car when you need one.</h3>
+            <ul class="dots"><li>Electric cars for the hours or days you need</li><li>Self-drive or with a driver</li><li>Price and terms confirmed before you commit</li></ul>
+            <div class="btn-row"><button class="btn btn-go" data-move="car"><span class="wheel" data-wheel></span>Book a Car</button><a class="btn btn-ghost" href="#gocar" data-go="gocar">How GoCar works</a></div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec feature">
-    <div class="wrap">
-      <div class="copy rv">
-        <span class="tag"><span class="wheel" data-wheel></span>GoCharge</span>
-        <h2>Power when you need it.</h2>
-        <p class="lead">Find a BvndleGo charging location, check the information you need and keep your EV moving.</p>
-        <button class="btn btn-go" data-move="charge"><span class="wheel" data-wheel></span>Find a Charger</button>
-      </div>
-      <div class="mock rv" aria-label="Example GoCharge session">
-        <div class="mock-bar"><span>GoCharge · Session</span><span class="pill"><i></i>Plugged in</span></div>
-        <div class="charge-grid">
-          <div class="charge-big">
-            <div class="ring-wrap"><svg viewBox="0 0 160 160"><circle class="ring-bg" cx="80" cy="80" r="70"/><circle class="ring-fg" id="ringLive" cx="80" cy="80" r="70"/></svg>
-              <div class="pct"><div><b id="pctLive">0%</b><small>BATTERY</small></div></div>
-            </div>
+        </article>
+        <article class="jc rv">
+          <div class="scene-box svc-bus"><div class="scene"><div class="route"></div><span class="stop" style="left:10%;top:46%"></span><span class="stop" style="left:36.6%;top:46%"></span><span class="stop" style="left:63.3%;top:46%"></span><span class="stop" style="left:90%;top:46%"></span><div class="bus-run" data-bus></div></div></div>
+          <div class="jb">
+            <span class="tag" style="align-self:flex-start"><span class="wheel" data-wheel></span>GoBus</span>
+            <h3>A commute you can build your day around.</h3>
+            <ul class="dots"><li>A seat on a daily route</li><li>Staff shuttles for organisations</li><li>Charters for groups and events</li></ul>
+            <div class="btn-row"><button class="btn btn-go" data-move="bus:Me"><span class="wheel" data-wheel></span>Find My Bus Route</button><a class="btn btn-ghost" href="#gobus" data-go="gobus">How GoBus works</a></div>
           </div>
-          <div class="pins">
-            <div class="pinrow"><span class="pin"><svg style="color:#fff"><use href="#i-bolt"/></svg></span><div><small>Charger</small>Location A</div><span class="avail">Open</span></div>
-            <div class="pinrow"><span class="pin"><svg style="color:#fff"><use href="#i-bolt"/></svg></span><div><small>Charger</small>Location B</div><span class="avail">Open</span></div>
-            <div class="pinrow"><span class="pin"><svg style="color:#fff"><use href="#i-bolt"/></svg></span><div><small>Charger</small>Location C</div><span class="avail" style="color:var(--pink-hi)">In use</span></div>
+        </article>
+        <article class="jc rv">
+          <div class="scene-box svc-charge"><div class="scene"><div class="ring-wrap"><svg viewBox="0 0 160 160"><circle class="ring-bg" cx="80" cy="80" r="70"/><circle class="ring-fg" cx="80" cy="80" r="70"/></svg><div class="bolt"><svg style="color:#FF73B3"><use href="#i-bolt"/></svg></div></div></div></div>
+          <div class="jb">
+            <span class="tag" style="align-self:flex-start"><span class="wheel" data-wheel></span>GoCharge</span>
+            <h3>Power when you need it.</h3>
+            <ul class="dots"><li>Charging access for EV drivers</li><li>Recurring charging for fleets</li><li>Charging site partnerships</li></ul>
+            <div class="btn-row"><button class="btn btn-go" data-move="charge"><span class="wheel" data-wheel></span>Find EV Charging</button><a class="btn btn-ghost" href="#gocharge" data-go="gocharge">How GoCharge works</a></div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec rewards">
-    <div class="wrap rewards-grid">
-      <div class="copy rv">
-        <span class="tag"><svg class="coin" style="width:22px;height:22px"><use href="#i-coin"/></svg>Rewards</span>
-        <h2>Every time you Go, you get more.</h2>
-        <p class="lead">Eligible rides, hires and charging sessions can earn Bvndle Coins. See what you earn, build your balance and use rewards again across BvndleGo and the wider Bvndle ecosystem.</p>
-        <a class="btn btn-ghost" href="#rewards" data-go="rewards">See How Rewards Work</a>
-      </div>
-      <div class="wallet rv" data-wallet aria-label="Example Bvndle Coins balance">
-        <div class="wallet-top"><div><small>Bvndle Coins</small><div class="balance"><svg class="coin"><use href="#i-coin"/></svg><span data-bal>120</span></div></div><span class="logo"><span class="logo-b">bvndle<i style="color:#fff">.</i></span></span></div>
-        <div class="acts">
-          <button class="act" data-earn="25"><span class="ai"><svg><use href="#i-car"/></svg></span>GoCar hire<span class="earn">+ Coins</span></button>
-          <button class="act" data-earn="5"><span class="ai"><svg><use href="#i-bus"/></svg></span>GoBus trip<span class="earn">+ Coins</span></button>
-          <button class="act" data-earn="10"><span class="ai"><svg><use href="#i-bolt"/></svg></span>GoCharge session<span class="earn">+ Coins</span></button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec corp light">
-    <div class="wrap">
-      <div class="copy rv">
-        <span class="eyebrow">For Business</span>
-        <h2>Move your people better.</h2>
-        <p class="lead">Staff shuttles. Executive EV hire. Fleet charging. Route planning. One mobility partner built for businesses that care about reliability, employee experience and sustainability.</p>
-        <button class="btn btn-go" data-move="biz"><span class="wheel" data-wheel></span>Talk to BvndleGo for Business</button>
-      </div>
-      <div class="corp-list rv">
-        <div class="corp-item"><svg><use href="#i-bus"/></svg>Staff shuttles</div>
-        <div class="corp-item"><svg><use href="#i-car"/></svg>Executive EV hire</div>
-        <div class="corp-item"><svg><use href="#i-bolt"/></svg>Fleet charging</div>
-        <div class="corp-item"><svg><use href="#i-route"/></svg>Route planning</div>
+        </article>
       </div>
     </div>
   </section>
@@ -710,22 +764,88 @@ footer{background:var(--ink);padding-block:clamp(56px,8vw,100px) 36px}
         </svg>
       </div>
       <div class="how-steps">
-        <div class="step"><span class="n">01</span><b>Pick</b><p>Choose GoCar, GoBus or GoCharge.</p></div>
-        <div class="step"><span class="n">02</span><b>Tell us</b><p>Tell us what you need.</p></div>
-        <div class="step"><span class="n">03</span><b>Book</b><p>Confirm your booking or request.</p></div>
-        <div class="step"><span class="n">04</span><b>Move</b><p>Move with BvndleGo.</p></div>
-        <div class="step"><span class="n">05</span><b>Earn</b><p>Earn eligible Bvndle Coins and come back for more.</p></div>
+        <div class="step"><span class="n">01</span><b>Choose</b><p>Pick GoCar, GoBus or GoCharge.</p></div>
+        <div class="step"><span class="n">02</span><b>Request</b><p>Tell us what you need, where and when.</p></div>
+        <div class="step"><span class="n">03</span><b>Confirm</b><p>We confirm availability, price and terms. You decide.</p></div>
+        <div class="step"><span class="n">04</span><b>Move</b><p>Move with BvndleGo, with support on your chosen channel.</p></div>
+        <div class="step"><span class="n">05</span><b>Earn</b><p>Earn Bvndle Coins on eligible activity and come back for more.</p></div>
       </div>
-      <div class="how-cta"><button class="btn btn-go" data-move><span class="wheel" data-wheel></span>Move Better</button></div>
+      <div class="note rv" style="margin-top:32px;max-width:760px;margin-inline:auto"><svg><use href="#i-info"/></svg><span>A request is not a booking. Nothing is confirmed or charged until the team has confirmed availability, price and terms with you, and you agree.</span></div>
+    </div>
+  </section>
+
+  <section class="sec dark">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="eyebrow">Mobility for business</span>
+        <h2>Move your people better.</h2>
+        <p class="lead">Staff shuttles. Executive EV hire. Fleet charging. Event movement. One mobility partner built for businesses that care about reliability, employee experience and sustainability.</p>
+      </div>
+      <div class="ucs" id="ucsHome"></div>
+      <div class="btn-row rv" style="margin-top:28px"><button class="btn btn-go" data-move="biz"><span class="wheel" data-wheel></span>Request a Corporate Mobility Proposal</button></div>
+    </div>
+  </section>
+
+  <section class="sec rewards">
+    <div class="wrap rewards-grid">
+      <div class="rv">
+        <span class="tag"><svg class="coin" style="width:22px;height:22px"><use href="#i-coin"/></svg>Move, earn and return</span>
+        <h2 style="font-size:clamp(34px,4.6vw,60px);margin-top:18px">Every time you Go, you get more.</h2>
+        <p class="lead" style="margin-top:18px">Eligible rides, hires and charging sessions can earn Bvndle Coins. Here is how a journey turns into rewards.</p>
+        <ol class="example">
+          <li><span><b>Request a GoCar hire</b>Tell us when and where you need the car.</span></li>
+          <li><span><b>See the Coins before you confirm</b>If the hire is eligible, the Coins it earns are shown with your quote.</span></li>
+          <li><span><b>Complete your hire</b>Your Coins are added to your Bvndle balance.</span></li>
+          <li><span><b>Use them next time</b>Apply eligible Coins to a future GoBus trip or GoCharge session, or explore Bvndle.</span></li>
+        </ol>
+        <div class="btn-row" style="margin-top:24px"><a class="btn btn-ghost" href="#rewards" data-go="rewards">How Rewards Work</a></div>
+      </div>
+      <div class="wallet rv" data-wallet aria-label="Illustration of a Bvndle Coins balance">
+        <span class="illus" style="right:18px;bottom:-12px">Illustration</span>
+        <div class="wallet-top"><div><small>Bvndle Coins</small><div class="balance"><svg class="coin"><use href="#i-coin"/></svg><span data-bal>120</span></div></div><span class="logo"><span class="logo-b">bvndle<i style="color:#fff">.</i></span></span></div>
+        <div class="acts">
+          <button class="act" data-earn="25"><span class="ai"><svg><use href="#i-car"/></svg></span><span>GoCar hire</span><span class="earn">+ Coins</span></button>
+          <button class="act" data-earn="5"><span class="ai"><svg><use href="#i-bus"/></svg></span><span>GoBus trip</span><span class="earn">+ Coins</span></button>
+          <button class="act" data-earn="10"><span class="ai"><svg><use href="#i-bolt"/></svg></span><span>GoCharge session</span><span class="earn">+ Coins</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec light">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="eyebrow">Why trust BvndleGo?</span>
+        <h2>Clear terms. Clear next steps.</h2>
+        <p class="lead">Mobility is a practical decision about your time and money. Here is what you can count on.</p>
+      </div>
+      <div class="trust" id="trustGrid"></div>
+      <div class="cover rv">
+        <div><span class="eyebrow">Where we operate</span><h3 data-coverage>Starting in Lagos</h3><p>Routes, vehicles and charging locations are listed here as each one goes live. Send a request with your location and the team will confirm what is available to you.</p></div>
+        <div><span class="eyebrow">Contact &amp; support</span><div data-support></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec light" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head rv"><span class="eyebrow">Before you book</span><h2 style="font-size:clamp(28px,3.6vw,44px)">Common questions</h2></div>
+      <div class="faq" id="faqTop"></div>
+      <a class="biz-link" href="#faqs" data-go="faqs" style="color:var(--purple)">All FAQs<svg><use href="#i-arrow"/></svg></a>
     </div>
   </section>
 
   <section class="sec final">
     <span class="wheel big-wheel spin-slow" data-wheel></span>
     <div class="wrap">
+      <span class="eyebrow">Move Better</span>
       <h2 class="rv">Wherever you are going, start here.</h2>
       <p class="lead rv">Choose the way you want to move and tell us what you need. We will route your request to the right BvndleGo service.</p>
-      <button class="btn btn-go rv" data-move><span class="wheel" data-wheel></span>Move Better</button>
+      <div class="btn-row rv">
+        <button class="btn btn-go" data-move="car"><span class="wheel" data-wheel></span>Book a Car</button>
+        <button class="btn btn-go" data-move="bus:Me"><span class="wheel" data-wheel></span>Find My Bus Route</button>
+        <button class="btn btn-go" data-move="charge"><span class="wheel" data-wheel></span>Find EV Charging</button>
+      </div>
     </div>
   </section>
 </div>
@@ -736,11 +856,23 @@ footer{background:var(--ink);padding-block:clamp(56px,8vw,100px) 36px}
     <div class="wrap">
       <div>
         <span class="tag"><span class="wheel" data-wheel></span>GoCar</span>
-        <h1 style="margin-top:18px"><span class="ln"><span style="--i:0">Your car.</span></span><span class="ln"><span style="--i:1">Your time.</span></span><span class="ln"><span style="--i:2">Your terms.</span></span></h1>
+        <h1 style="margin-top:18px"><span class="ln"><span style="--i:0">Your car.</span></span> <span class="ln"><span style="--i:1">Your time.</span></span> <span class="ln"><span style="--i:2">Your terms.</span></span></h1>
         <p class="lead">Need a car for a meeting, a weekend, a few days or longer? Choose an electric vehicle, select how long you need it, add a driver if required and Go.</p>
-        <div class="btn-row"><a class="btn btn-go" href="#car-form" data-scroll="car-form"><span class="wheel" data-wheel></span>Book GoCar</a></div>
+        <div class="btn-row"><a class="btn btn-go" href="#car-form" data-scroll="car-form"><span class="wheel" data-wheel></span>Request a Car</a></div>
       </div>
-      <div class="pvis svc-car" aria-hidden="true"><div class="skyline"></div><div class="road"></div><div class="car-run" data-car="driver"></div></div>
+      <div class="mock" aria-label="Illustration of a GoCar">
+        <span class="illus" style="right:16px;top:16px">Illustration</span>
+        <div class="mock-bar"><span>GoCar · Choose how you drive</span></div>
+        <div class="car-show" id="carShow" data-mode="driver"><div class="floor"></div><div class="car-big" data-car="driver"></div></div>
+        <div class="seg" role="radiogroup" aria-label="Drive mode" style="margin-top:14px">
+          <label><input type="radio" name="m-drive" id="m-self" value="self"><span>Self-drive</span></label>
+          <label><input type="radio" name="m-drive" id="m-driver" value="driver" checked><span>With driver</span></label>
+        </div>
+        <div class="dur">
+          <div class="dur-top"><span>How long do you need it?</span><b id="durOut">1 day</b></div>
+          <input type="range" id="durRange" min="1" max="12" value="5" aria-label="Hire duration">
+        </div>
+      </div>
     </div>
   </section>
   <section class="sec light">
@@ -757,9 +889,18 @@ footer{background:var(--ink);padding-block:clamp(56px,8vw,100px) 36px}
         </div>
       </div>
     </div>
+    <div class="wrap" style="margin-top:56px">
+      <span class="eyebrow">What happens after you request</span>
+      <ol class="proc">
+        <li><span class="pn">1</span><b>Send your request</b><p>Pickup location, dates, vehicle preference and whether you need a driver.</p></li>
+        <li><span class="pn">2</span><b>We confirm the details</b><p>Vehicle, price, any deposit and the rental conditions that apply.</p></li>
+        <li><span class="pn">3</span><b>You decide</b><p>Your hire is booked only when you accept the quote.</p></li>
+        <li><span class="pn">4</span><b>Pick up and Go</b><p>Collect your car or meet your driver, and earn eligible Coins.</p></li>
+      </ol>
+    </div>
   </section>
   <section class="sec formsec" id="car-form"><div class="wrap">
-    <div class="sticky"><span class="eyebrow">GoCar booking</span><h2>Book GoCar.</h2><p class="lead">Tell us when and where. Bvndle Tag is optional.</p></div>
+    <div class="sticky"><span class="eyebrow">GoCar</span><h2>Request a booking.</h2><p class="lead">Tell us when and where. The team will confirm availability, price, any deposit and rental conditions before anything is booked.</p></div>
     <div class="fpanel" data-form="car"></div>
   </div></section>
 </div>
@@ -770,24 +911,30 @@ footer{background:var(--ink);padding-block:clamp(56px,8vw,100px) 36px}
     <div class="wrap">
       <div>
         <span class="tag"><span class="wheel" data-wheel></span>GoBus</span>
-        <h1 style="margin-top:18px"><span class="ln"><span style="--i:0">A better way</span></span><span class="ln"><span style="--i:1">to get there,</span></span><span class="ln"><span style="--i:2">every day.</span></span></h1>
+        <h1 style="margin-top:18px"><span class="ln"><span style="--i:0">A better way</span></span> <span class="ln"><span style="--i:1">to get there,</span></span> <span class="ln"><span style="--i:2">every day.</span></span></h1>
         <p class="lead">Reserve a comfortable shuttle for your commute, or let us build a dependable transport programme for your people.</p>
-        <div class="btn-row"><a class="btn btn-go" href="#bus-form" data-scroll="bus-form" data-who="Me"><span class="wheel" data-wheel></span>Find My Route</a><a class="btn btn-ghost" href="#bus-form" data-scroll="bus-form" data-who="My employees">Move My Team</a></div>
+        <div class="btn-row"><a class="btn btn-go" href="#bus-form" data-scroll="bus-form" data-who="Me"><span class="wheel" data-wheel></span>Find My Bus Route</a><a class="btn btn-ghost" href="#biz-staff" data-go="biz-staff">Staff transport for companies</a></div>
       </div>
-      <div class="pvis svc-bus" aria-hidden="true"><div class="route"></div><span class="stop" style="left:10%;top:55%"></span><span class="stop" style="left:36.6%;top:55%"></span><span class="stop" style="left:63.3%;top:55%"></span><span class="stop" style="left:90%;top:55%"></span><div class="bus-run" data-bus></div></div>
+      <div class="pvis svc-bus" aria-hidden="true"><span class="illus" style="left:16px;top:16px">Illustration</span><div class="route"></div><span class="stop" style="left:10%;top:55%"></span><span class="stop" style="left:36.6%;top:55%"></span><span class="stop" style="left:63.3%;top:55%"></span><span class="stop" style="left:90%;top:55%"></span><div class="bus-run" data-bus></div></div>
     </div>
   </section>
   <section class="sec light">
     <div class="wrap">
       <div class="cols" style="margin-top:0">
         <div class="card rv"><span class="ci"><svg><use href="#i-people"/></svg></span><h3>For commuters</h3><p>Choose corridor/route, date or subscription preference, reserve a seat and receive trip information.</p></div>
-        <div class="card rv"><span class="ci"><svg><use href="#i-brief"/></svg></span><h3>For businesses</h3><p>Tell us route(s), headcount, schedule and contact details. BvndleGo designs the mobility solution.</p></div>
-        <div class="card rv"><span class="ci"><svg><use href="#i-bus"/></svg></span><h3>For events/groups</h3><p>Request a charter or group movement plan.</p></div>
+        <div class="card rv"><span class="ci"><svg><use href="#i-brief"/></svg></span><h3>For businesses</h3><p>Tell us route(s), headcount, schedule and contact details. BvndleGo designs the mobility solution.</p><a class="biz-link" href="#biz-staff" data-go="biz-staff" style="margin-top:4px;color:var(--purple)">Staff transport<svg><use href="#i-arrow"/></svg></a></div>
+        <div class="card rv"><span class="ci"><svg><use href="#i-bus"/></svg></span><h3>For events/groups</h3><p>Request a charter or group movement plan.</p><a class="biz-link" href="#biz-events" data-go="biz-events" style="margin-top:4px;color:var(--purple)">Event transport<svg><use href="#i-arrow"/></svg></a></div>
+      </div>
+    </div>
+    <div class="wrap two" style="margin-top:56px;align-items:center">
+      <div class="rv"><span class="eyebrow">Your route</span><h2 style="margin-top:14px">Tell us where you travel. We will match you to a route.</h2><p class="lead" style="margin-top:14px">Share your start point, destination and travel times. The team will match you to a GoBus route, or let you know when one opens near you.</p></div>
+      <div class="spec rv"><span class="illus" style="right:16px;top:16px">Coming to each route</span><h3>Every GoBus route will show</h3>
+        <ul class="spec-list"><li><svg><use href="#i-route"/></svg>Stops along the route</li><li><svg><use href="#i-clock"/></svg>Departure times</li><li><svg><use href="#i-cash"/></svg>Fare</li><li><svg><use href="#i-seat"/></svg>Seat availability</li><li><svg><use href="#i-flag"/></svg>Pickup instructions &amp; service updates</li></ul>
       </div>
     </div>
   </section>
   <section class="sec formsec" id="bus-form"><div class="wrap">
-    <div class="sticky"><span class="eyebrow">GoBus request</span><h2>Who are we moving?</h2><p class="lead">The form adapts to your answer.</p></div>
+    <div class="sticky"><span class="eyebrow">GoBus</span><h2>Who are we moving?</h2><p class="lead">The form adapts to your answer. The team will confirm the route, times and fare before you commit.</p></div>
     <div class="fpanel" data-form="bus"></div>
   </div></section>
 </div>
@@ -798,36 +945,42 @@ footer{background:var(--ink);padding-block:clamp(56px,8vw,100px) 36px}
     <div class="wrap">
       <div>
         <span class="tag"><span class="wheel" data-wheel></span>GoCharge</span>
-        <h1 style="margin-top:18px"><span class="ln"><span style="--i:0">Find power.</span></span><span class="ln"><span style="--i:1">Plug in.</span></span><span class="ln"><span style="--i:2">Keep moving.</span></span></h1>
+        <h1 style="margin-top:18px"><span class="ln"><span style="--i:0">Find power.</span></span> <span class="ln"><span style="--i:1">Plug in.</span></span> <span class="ln"><span style="--i:2">Keep moving.</span></span></h1>
         <p class="lead">Charging should be part of the journey, not a problem you have to solve. Find BvndleGo charging access for your EV or talk to us about fleet and corporate charging.</p>
-        <div class="btn-row"><a class="btn btn-go" href="#charge-form" data-scroll="charge-form" data-need="Charge my EV"><span class="wheel" data-wheel></span>Find a Charger</a><a class="btn btn-ghost" href="#charge-form" data-scroll="charge-form" data-need="Charge a fleet">Charge My Fleet</a></div>
+        <div class="btn-row"><a class="btn btn-go" href="#charge-form" data-scroll="charge-form" data-need="Charge my EV"><span class="wheel" data-wheel></span>Find EV Charging</a><a class="btn btn-ghost" href="#charge-form" data-scroll="charge-form" data-need="Charge a fleet">Enquire About Fleet Charging</a></div>
       </div>
-      <div class="pvis svc-charge" aria-hidden="true"><div class="ring-wrap"><svg viewBox="0 0 160 160"><circle class="ring-bg" cx="80" cy="80" r="70"/><circle class="ring-fg" cx="80" cy="80" r="70"/></svg><div class="bolt"><svg style="color:#FF73B3"><use href="#i-bolt"/></svg></div></div></div>
+      <div class="pvis svc-charge" aria-hidden="true"><span class="illus" style="left:16px;top:16px">Illustration</span><div class="ring-wrap"><svg viewBox="0 0 160 160"><circle class="ring-bg" cx="80" cy="80" r="70"/><circle class="ring-fg" cx="80" cy="80" r="70"/></svg><div class="bolt"><svg style="color:#FF73B3"><use href="#i-bolt"/></svg></div></div></div>
     </div>
   </section>
   <section class="sec light">
     <div class="wrap">
       <div class="cols" style="margin-top:0">
         <div class="card rv"><span class="ci"><svg><use href="#i-plug"/></svg></span><h3>Individuals</h3><p>Find a charging location and relevant session information.</p></div>
-        <div class="card rv"><span class="ci"><svg><use href="#i-brief"/></svg></span><h3>Businesses/fleets</h3><p>Enquire about recurring fleet charging or charging infrastructure needs.</p></div>
+        <div class="card rv"><span class="ci"><svg><use href="#i-brief"/></svg></span><h3>Businesses/fleets</h3><p>Enquire about recurring fleet charging or charging infrastructure needs.</p><a class="biz-link" href="#biz-fleet" data-go="biz-fleet" style="margin-top:4px;color:var(--purple)">Fleet charging<svg><use href="#i-arrow"/></svg></a></div>
+      </div>
+    </div>
+    <div class="wrap two" style="margin-top:56px;align-items:center">
+      <div class="rv"><span class="eyebrow">Charging locations</span><h2 style="margin-top:14px">Locations are published as they are verified.</h2><p class="lead" style="margin-top:14px">Register your interest with your area and connector type. We will tell you about charging access near you, or talk through fleet and site options.</p></div>
+      <div class="spec rv"><span class="illus" style="right:16px;top:16px">Coming to each station</span><h3>Every GoCharge location will show</h3>
+        <ul class="spec-list"><li><svg><use href="#i-pin"/></svg>Address &amp; directions</li><li><svg><use href="#i-clock"/></svg>Operating hours</li><li><svg><use href="#i-plug"/></svg>Connector type &amp; compatible vehicles</li><li><svg><use href="#i-radar"/></svg>Live availability<span>where supported</span></li><li><svg><use href="#i-cash"/></svg>Pricing &amp; how to pay</li><li><svg><use href="#i-chat"/></svg>Who to contact if a charger is unavailable</li></ul>
       </div>
     </div>
   </section>
   <section class="sec formsec" id="charge-form"><div class="wrap">
-    <div class="sticky"><span class="eyebrow">GoCharge request</span><h2>What do you need to do?</h2><p class="lead">Charge an EV, charge a fleet or discuss a charging site.</p></div>
+    <div class="sticky"><span class="eyebrow">GoCharge</span><h2>What do you need to do?</h2><p class="lead">Charge an EV, charge a fleet or discuss a charging site.</p></div>
     <div class="fpanel" data-form="charge"></div>
   </div></section>
 </div>
 
-<!-- =================== BUSINESS =================== -->
+<!-- =================== BUSINESS HUB =================== -->
 <div class="view" data-view="business" hidden>
   <section class="phero">
     <div class="wrap">
       <div>
         <span class="eyebrow">For Business</span>
-        <h1 style="margin-top:18px"><span class="ln"><span style="--i:0">Mobility that</span></span><span class="ln"><span style="--i:1">works as hard as</span></span><span class="ln"><span style="--i:2">your business.</span></span></h1>
-        <p class="lead">Give your people a more dependable way to move and your organisation one partner across staff shuttles, executive EV hire and charging.</p>
-        <div class="btn-row"><a class="btn btn-go" href="#biz-form" data-scroll="biz-form"><span class="wheel" data-wheel></span>Build My Mobility Plan</a></div>
+        <h1 style="margin-top:18px"><span class="ln"><span style="--i:0">Mobility that</span></span> <span class="ln"><span style="--i:1">works as hard as</span></span> <span class="ln"><span style="--i:2">your business.</span></span></h1>
+        <p class="lead">Give your people a more dependable way to move and your organisation one partner across staff shuttles, executive EV hire, fleet charging and event movement.</p>
+        <div class="btn-row"><a class="btn btn-go" href="#biz-form" data-scroll="biz-form"><span class="wheel" data-wheel></span>Request a Corporate Mobility Proposal</a></div>
       </div>
       <div class="pvis" aria-hidden="true" style="display:grid;place-items:center">
         <div style="position:absolute;inset:0" class="svc-bus"></div>
@@ -835,22 +988,29 @@ footer{background:var(--ink);padding-block:clamp(56px,8vw,100px) 36px}
       </div>
     </div>
   </section>
+  <section class="sec dark">
+    <div class="wrap">
+      <div class="sec-head rv"><span class="eyebrow">Solutions</span><h2 style="font-size:clamp(30px,4vw,48px)">Choose the solution you need.</h2></div>
+      <div class="ucs" id="ucsHub"></div>
+    </div>
+  </section>
   <section class="sec light">
     <div class="wrap">
       <div class="cols" style="margin-top:0">
-        <div class="card rv"><span class="ci"><svg><use href="#i-people"/></svg></span><h3>Staff Mobility</h3><p>Scheduled employee transport built around your routes and headcount.</p></div>
-        <div class="card rv"><span class="ci"><svg><use href="#i-car"/></svg></span><h3>Executive Mobility</h3><p>Electric vehicle hire for executives, visitors and business travel.</p></div>
-        <div class="card rv"><span class="ci"><svg><use href="#i-bolt"/></svg></span><h3>Fleet &amp; Charging</h3><p>Charging support for EV fleets and corporate mobility requirements.</p></div>
         <div class="card rv"><span class="ci"><svg><use href="#i-radar"/></svg></span><h3>Technology &amp; Visibility</h3><p>Digital scheduling, tracking and route optimisation capabilities.</p></div>
         <div class="card rv"><span class="ci"><svg><use href="#i-leaf"/></svg></span><h3>Sustainability</h3><p>An EV-led mobility option that can support corporate sustainability objectives.</p></div>
+        <div class="card rv"><span class="ci"><svg><use href="#i-brief"/></svg></span><h3>One partner</h3><p>Staff shuttles, executive EV hire, fleet charging and event movement under one relationship.</p></div>
       </div>
     </div>
   </section>
   <section class="sec formsec" id="biz-form"><div class="wrap">
-    <div class="sticky"><span class="eyebrow">Business enquiry</span><h2>Build My Mobility Plan.</h2><p class="lead">Share what you need and the team will shape the plan around it.</p></div>
+    <div class="sticky"><span class="eyebrow">Business enquiry</span><h2>Request a Corporate Mobility Proposal.</h2><p class="lead">A few quick details. The team will come back with a proposal shaped around your needs.</p></div>
     <div class="fpanel" data-form="biz"></div>
   </div></section>
 </div>
+
+<!-- business use-case pages are generated from BIZ data below -->
+<div id="bizViews"></div>
 
 <!-- =================== REWARDS =================== -->
 <div class="view" data-view="rewards" hidden>
@@ -858,29 +1018,26 @@ footer{background:var(--ink);padding-block:clamp(56px,8vw,100px) 36px}
     <div class="wrap">
       <div>
         <span class="tag"><svg class="coin" style="width:22px;height:22px"><use href="#i-coin"/></svg>Bvndle ↔ BvndleGo</span>
-        <h1 style="margin-top:18px"><span class="ln"><span style="--i:0">Your movement</span></span><span class="ln"><span style="--i:1">should give you</span></span><span class="ln"><span style="--i:2">something back.</span></span></h1>
+        <h1 style="margin-top:18px"><span class="ln"><span style="--i:0">Your movement</span></span> <span class="ln"><span style="--i:1">should give you</span></span> <span class="ln"><span style="--i:2">something back.</span></span></h1>
         <p class="lead">BvndleGo is connected to Bvndle, so eligible mobility activity can earn Bvndle Coins. Your rewards make the next ride, hire or charge more valuable and can connect you to the wider Bvndle rewards ecosystem.</p>
         <div class="btn-row"><button class="btn btn-go" data-move><span class="wheel" data-wheel></span>Start Moving &amp; Earning</button><a class="btn btn-ghost" href="https://bvndle.com" target="_blank" rel="noopener">Explore Bvndle Rewards</a></div>
       </div>
-      <div class="wallet" data-wallet aria-label="Example Bvndle Coins balance">
+      <div class="wallet" data-wallet aria-label="Illustration of a Bvndle Coins balance">
+        <span class="illus" style="right:18px;bottom:-12px">Illustration</span>
         <div class="wallet-top"><div><small>Bvndle Coins</small><div class="balance"><svg class="coin"><use href="#i-coin"/></svg><span data-bal>120</span></div></div><span class="logo"><span class="logo-b">bvndle<i style="color:#fff">.</i></span></span></div>
         <div class="acts">
-          <button class="act" data-earn="25"><span class="ai"><svg><use href="#i-car"/></svg></span>GoCar hire<span class="earn">+ Coins</span></button>
-          <button class="act" data-earn="5"><span class="ai"><svg><use href="#i-bus"/></svg></span>GoBus trip<span class="earn">+ Coins</span></button>
-          <button class="act" data-earn="10"><span class="ai"><svg><use href="#i-bolt"/></svg></span>GoCharge session<span class="earn">+ Coins</span></button>
+          <button class="act" data-earn="25"><span class="ai"><svg><use href="#i-car"/></svg></span><span>GoCar hire</span><span class="earn">+ Coins</span></button>
+          <button class="act" data-earn="5"><span class="ai"><svg><use href="#i-bus"/></svg></span><span>GoBus trip</span><span class="earn">+ Coins</span></button>
+          <button class="act" data-earn="10"><span class="ai"><svg><use href="#i-bolt"/></svg></span><span>GoCharge session</span><span class="earn">+ Coins</span></button>
         </div>
       </div>
     </div>
   </section>
   <section class="sec light">
     <div class="wrap">
-      <div class="cols" style="margin-top:0">
-        <div class="card rv"><span class="ci"><svg><use href="#i-coin"/></svg></span><h3>Earn</h3><p>Eligible GoCar, GoBus and GoCharge activity.</p></div>
-        <div class="card rv"><span class="ci"><svg><use href="#i-eye"/></svg></span><h3>See</h3><p>Coins earned shown beside eligible prices and transactions, with one accessible balance.</p></div>
-        <div class="card rv"><span class="ci"><svg><use href="#i-wallet"/></svg></span><h3>Use</h3><p>Apply eligible Coins to future BvndleGo activity, subject to the applicable reward rules.</p></div>
-        <div class="card rv"><span class="ci"><svg><use href="#i-compass"/></svg></span><h3>Explore</h3><p>Discover the wider Bvndle ecosystem at <a href="https://bvndle.com" target="_blank" rel="noopener" style="color:var(--pink);font-weight:700">bvndle.com</a>.</p></div>
-        <div class="card rv"><span class="ci"><svg><use href="#i-tag"/></svg></span><h3>Identity</h3><p>Already have a Bvndle Tag? Sign in. New users can create their identity as part of the BvndleGo journey.</p></div>
-      </div>
+      <div class="sec-head rv"><span class="eyebrow">How Coins work</span><h2 style="font-size:clamp(30px,4vw,48px)">Five things to know.</h2></div>
+      <div class="qa" id="coinQA"></div>
+      <p class="fineprint">Not every transaction qualifies. The Coins an eligible booking earns, and the rules that apply, are shown before you confirm.</p>
     </div>
   </section>
 </div>
@@ -891,7 +1048,7 @@ footer{background:var(--ink);padding-block:clamp(56px,8vw,100px) 36px}
     <div class="wrap" style="grid-template-columns:minmax(0,1fr)">
       <div>
         <span class="eyebrow">About BvndleGo</span>
-        <h1 style="margin-top:18px;max-width:15ch"><span class="ln"><span style="--i:0">Built for how people</span></span><span class="ln"><span style="--i:1">and businesses</span></span><span class="ln"><span style="--i:2">need to move.</span></span></h1>
+        <h1 style="margin-top:18px;max-width:15ch"><span class="ln"><span style="--i:0">Built for how people</span></span> <span class="ln"><span style="--i:1">and businesses</span></span> <span class="ln"><span style="--i:2">need to move.</span></span></h1>
         <p class="lead">BvndleGo is a technology-powered mobility company connecting electric car hire, passenger transportation and EV charging. We are building a simpler mobility experience around reliability, visibility, flexibility, cashless interactions and rewards.</p>
         <div class="chips"><span class="chip">Reliability</span><span class="chip">Visibility</span><span class="chip">Flexibility</span><span class="chip">Cashless interactions</span><span class="chip">Rewards</span></div>
       </div>
@@ -901,7 +1058,7 @@ footer{background:var(--ink);padding-block:clamp(56px,8vw,100px) 36px}
     <div class="wrap">
       <span class="eyebrow">Our belief</span>
       <p class="belief" id="belief">Movement should be <span class="e">easier to plan,</span> <span class="e">easier to pay for,</span> <span class="e">easier to trust</span> and <span class="e">better for the future.</span></p>
-      <div style="margin-top:36px"><button class="btn btn-go" data-move><span class="wheel" data-wheel></span>Move Better</button></div>
+      <div style="margin-top:36px"><button class="btn btn-go" data-move><span class="wheel" data-wheel></span>Start a request</button></div>
     </div>
   </section>
 </div>
@@ -910,11 +1067,11 @@ footer{background:var(--ink);padding-block:clamp(56px,8vw,100px) 36px}
 <div class="view" data-view="faqs" hidden>
   <section class="phero" style="padding-bottom:40px">
     <div class="wrap" style="grid-template-columns:minmax(0,1fr)">
-      <div><span class="eyebrow">FAQs</span><h1 style="margin-top:18px"><span class="ln"><span style="--i:0">Questions,</span></span><span class="ln"><span style="--i:1">answered.</span></span></h1></div>
+      <div><span class="eyebrow">FAQs</span><h1 style="margin-top:18px"><span class="ln"><span style="--i:0">Questions,</span></span> <span class="ln"><span style="--i:1">answered.</span></span></h1></div>
     </div>
   </section>
   <section class="sec light" style="padding-top:clamp(40px,6vw,72px)">
-    <div class="wrap"><div class="faq" id="faq" style="margin-top:0"></div></div>
+    <div class="wrap"><div class="ftabs" id="ftabs" role="group" aria-label="Filter questions"></div><div class="faq" id="faq"></div></div>
   </section>
 </div>
 
@@ -924,19 +1081,19 @@ footer{background:var(--ink);padding-block:clamp(56px,8vw,100px) 36px}
   <div class="wrap">
     <div class="f-cta">
       <div><h2>Ready to move better?</h2><p>Tell us what you need.</p></div>
-      <button class="btn btn-go" data-move><span class="wheel" data-wheel></span>Move Better</button>
+      <div class="btn-row"><button class="btn btn-go" data-move><span class="wheel" data-wheel></span>Start a request</button><button class="btn btn-ghost" data-move="biz">Business enquiry</button></div>
     </div>
     <div class="f-links">
-      <a href="#gocar" data-go="gocar">GoCar</a><a href="#gobus" data-go="gobus">GoBus</a><a href="#gocharge" data-go="gocharge">GoCharge</a><a href="#business" data-go="business">For Business</a><a href="#rewards" data-go="rewards">Rewards</a><a href="#faqs" data-go="faqs">FAQs</a><a href="#about" data-go="about">About BvndleGo</a><a href="#contact" data-move>Contact</a>
+      <a href="#gocar" data-go="gocar">GoCar</a><a href="#gobus" data-go="gobus">GoBus</a><a href="#gocharge" data-go="gocharge">GoCharge</a><a href="#business" data-go="business">For Business</a><a href="#biz-staff" data-go="biz-staff">Staff transport</a><a href="#biz-executive" data-go="biz-executive">Executive car hire</a><a href="#biz-fleet" data-go="biz-fleet">Fleet charging</a><a href="#biz-events" data-go="biz-events">Event transport</a><a href="#rewards" data-go="rewards">Rewards</a><a href="#faqs" data-go="faqs">FAQs</a><a href="#about" data-go="about">About BvndleGo</a><a href="#contact" data-move>Contact</a>
     </div>
     <div class="f-bottom">
       <a class="logo" href="#home" data-go="home" aria-label="BvndleGo home" style="color:var(--white)"><span class="logo-b">bvndle<i>.</i></span><span class="logo-go">G<span class="wheel" data-wheel></span></span></a>
-      <span>BvndleGo is connected to the Bvndle rewards ecosystem. <a href="https://bvndle.com" target="_blank" rel="noopener">Explore Bvndle →</a></span>
+      <span><span data-coverage>Starting in Lagos</span> · BvndleGo is connected to the Bvndle rewards ecosystem. <a href="https://bvndle.com" target="_blank" rel="noopener">Explore Bvndle →</a></span>
     </div>
   </div>
 </footer>
 
-<!-- Move Better router -->
+<!-- Request flow -->
 <div class="router" id="router" hidden role="dialog" aria-modal="true" aria-labelledby="rTitle">
   <div class="router-card">
     <div class="r-head">
@@ -955,24 +1112,27 @@ footer{background:var(--ink);padding-block:clamp(56px,8vw,100px) 36px}
 
 <script>
 (() => {
-const RM = matchMedia('(prefers-reduced-motion: reduce)').matches; // only big motion (page wipe, parallax, smooth scroll)
+/* ================= SITE SETTINGS: fill these with verified details ================= */
+const CONFIG = {
+  coverage: 'Starting in Lagos',
+  support: { phone: '', whatsapp: '', email: '', hours: '' }   // e.g. phone: '+234 …', hours: 'Mon–Sat, 7am–8pm'
+};
+/* ================================================================================== */
+
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const TOUCH = matchMedia('(hover: none)').matches || 'ontouchstart' in window;
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
 const safe = (name, fn) => { try { fn(); } catch (e) { console.warn('[BvndleGo] ' + name + ' skipped:', e); } };
 if (window.CanvasRenderingContext2D && !CanvasRenderingContext2D.prototype.roundRect) {
   CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) { r = Math.min(+r || 0, w / 2, h / 2); this.moveTo(x + r, y); this.arcTo(x + w, y, x + w, y + h, r); this.arcTo(x + w, y + h, x, y + h, r); this.arcTo(x, y + h, x, y, r); this.arcTo(x, y, x + w, y, r); this.closePath(); return this; };
 }
 let size = () => {}, howUpdate = () => {};
-const $ = (s, r=document) => r.querySelector(s);
-const $$ = (s, r=document) => [...r.querySelectorAll(s)];
 
-/* ---------- Wheel (the O in GO) ---------- */
+/* ---------- Wheel ---------- */
 const BLADE = 'M50 50 C 54 38 60 24 57 9 L 47 8 C 49 22 47 36 50 50 Z';
 const wheelSVG = (pink='#E93C8E') => `<svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="${pink}"/><g class="blades">${[45,135,225,315].map(a=>`<path d="${BLADE}" fill="#fff" transform="rotate(${a} 50 50)"/>`).join('')}<circle cx="50" cy="50" r="6" fill="${pink}"/></g></svg>`;
-$$('[data-wheel]').forEach(el => el.innerHTML = wheelSVG());
-
-/* Scroll turns the logo wheel */
-const scrollWheels = $$('[data-scrollwheel] .blades');
-addEventListener('scroll', () => { const d = scrollY * .6; scrollWheels.forEach(b => b.style.transform = `rotate(${d}deg)`); }, {passive:true});
+const paintWheels = (root=document) => $$('[data-wheel]', root).forEach(el => { if(!el.firstChild) el.innerHTML = wheelSVG(); });
 
 /* ---------- Vehicles ---------- */
 const carSVG = (driver) => `<svg viewBox="0 0 170 70" width="100%" aria-hidden="true">
@@ -980,7 +1140,7 @@ const carSVG = (driver) => `<svg viewBox="0 0 170 70" width="100%" aria-hidden="
   <path d="M8 50 C8 40 16 36 30 34 L54 20 C60 16 67 14 76 14 L108 14 C117 14 123 17 129 23 L142 34 C154 36 162 41 162 50 L162 54 L8 54 Z" fill="#fff"/>
   <path d="M60 23 C64 20 69 19 76 19 L92 19 L92 34 L46 34 Z" fill="#4B2467"/>
   <path d="M97 19 L108 19 C114 19 118 21 122 25 L131 34 L97 34 Z" fill="#4B2467"/>
-  ${driver!==undefined?`<g class="driver"><circle cx="82" cy="26" r="5" fill="#FFB6D6"/><path d="M75 34 C75 30 78 29 82 29 C86 29 89 30 89 34 Z" fill="#FF73B3"/></g>`:''}
+  ${driver?`<g class="driver"><circle cx="82" cy="26" r="5" fill="#FFB6D6"/><path d="M75 34 C75 30 78 29 82 29 C86 29 89 30 89 34 Z" fill="#FF73B3"/></g>`:''}
   <rect x="150" y="40" width="10" height="5" rx="2" fill="#FFE27A"/>
   <rect x="10" y="40" width="7" height="5" rx="2" fill="#E93C8E"/>
   <path d="M30 44 H140" stroke="#E93C8E" stroke-width="3" stroke-linecap="round"/>
@@ -993,8 +1153,101 @@ const busSVG = () => `<svg viewBox="0 0 200 84" width="100%" aria-hidden="true">
   <rect x="176" y="16" width="12" height="30" rx="3" fill="#4B2467"/>
   ${[46,154].map(x=>`<g class="wh"><circle cx="${x}" cy="66" r="13" fill="#170824"/><circle cx="${x}" cy="66" r="6" fill="#E93C8E"/><path d="M${x} 58 V74 M${x-8} 66 H${x+8}" stroke="#fff" stroke-width="2"/></g>`).join('')}
 </svg>`;
-$$('[data-car]').forEach(el => el.innerHTML = carSVG(el.dataset.car ? 1 : undefined));
+
+/* ---------- Business use cases ---------- */
+const BIZ = [
+  { id:'staff', icon:'i-people', name:'Employee & staff transportation', short:'Scheduled shuttles built around your routes, shifts and headcount.', need:'Staff transport',
+    h:['Get your people','to work on time,','every day.'],
+    lead:'Scheduled employee transport built around your routes and headcount, so your team arrives on time and ready.',
+    problem:'Unreliable commutes cost organisations time, attendance and morale.',
+    model:'Scheduled GoBus staff shuttles designed around your employee origin areas, work location and shift times.',
+    steps:[['Share your requirements','Headcount, key employee origin areas, work location and operating times.'],['We design the routes','The team assesses an appropriate route plan and schedule.'],['Agree the proposal','Confirm routes, timings, pricing and start date.'],['Go live','Scheduling and tracking keep the programme visible to you.']] },
+  { id:'executive', icon:'i-car', name:'Executive & corporate car hire', short:'Electric cars for executives, visitors and business travel.', need:'Executive car hire',
+    h:['Dependable cars','for executives','and visitors.'],
+    lead:'Electric vehicle hire for executives, visitors and business travel, self-drive or with a driver.',
+    problem:'Ad-hoc car arrangements are hard to plan, control and account for.',
+    model:'GoCar electric hire for the hours or days you need, self-drive or with a driver, arranged through one business relationship.',
+    steps:[['Tell us your needs','Who travels, how often, where, and whether you need drivers.'],['Review the options','Vehicles, driver options, pricing and terms in one proposal.'],['Book for your people','Request cars for executives, visitors and trips as needed.'],['Ongoing support','One team to contact for changes and support.']] },
+  { id:'fleet', icon:'i-bolt', name:'Fleet charging & EV infrastructure', short:'Recurring charging for EV fleets and charging site needs.', need:'Fleet charging',
+    h:['Keep your','EV fleet','charged.'],
+    lead:'Charging support for EV fleets and corporate mobility requirements, from recurring charging to charging infrastructure needs.',
+    problem:'An EV fleet only works when charging is dependable and predictable.',
+    model:'Recurring GoCharge fleet charging, plus support for your charging infrastructure needs.',
+    steps:[['Share your fleet','Number of vehicles, vehicle and connector types, locations and charging pattern.'],['We assess the fit','Charging access, timing and any site requirements.'],['Agree the plan','Charging schedule, pricing and terms.'],['Charge and track','Keep vehicles moving with a dependable charging routine.']] },
+  { id:'events', icon:'i-flag', name:'Event transport & group movement', short:'Charters and coordinated movement for events and groups.', need:'Event & group movement',
+    h:['Move guests','and teams','together.'],
+    lead:'GoBus charters and coordinated group movement for events, offsites and group travel.',
+    problem:'Moving a group means coordinating many vehicles, timings and people at once.',
+    model:'GoBus charters and a group movement plan built around your event schedule and pickup points.',
+    steps:[['Share the event','Date, expected passenger count, pickup points and destinations.'],['We plan the movement','Vehicles, timings and routes for your group.'],['Confirm the plan','Agree the schedule, pricing and terms.'],['Move together','Your group travels on schedule with one point of contact.']] }
+];
+const ucCard = b => `<a class="uc rv" href="#biz-${b.id}" data-go="biz-${b.id}"><span class="ui"><svg><use href="#${b.icon}"/></svg></span><h3>${b.name}</h3><p>${b.short}</p><span class="more">Learn more<svg><use href="#i-arrow"/></svg></span></a>`;
+$('#ucsHome').innerHTML = BIZ.map(ucCard).join('');
+$('#ucsHub').innerHTML = BIZ.map(ucCard).join('');
+$('#bizViews').outerHTML = BIZ.map(b => `
+<div class="view" data-view="biz-${b.id}" hidden>
+  <section class="phero"><div class="wrap">
+    <div>
+      <a class="eyebrow" href="#business" data-go="business" style="text-decoration:none">For Business</a>
+      <h1 style="margin-top:18px">${b.h.map((l,i)=>`<span class="ln"><span style="--i:${i}">${l}</span></span>`).join(' ')}</h1>
+      <p class="lead">${b.lead}</p>
+      <div class="btn-row"><a class="btn btn-go" href="#bf-${b.id}" data-scroll="bf-${b.id}"><span class="wheel" data-wheel></span>Request a Corporate Mobility Proposal</a></div>
+    </div>
+    <div class="pvis" aria-hidden="true" style="display:grid;place-items:center">
+      <div style="position:absolute;inset:0" class="${b.id==='staff'||b.id==='events'?'svc-bus':b.id==='fleet'?'svc-charge':'svc-car'}"></div>
+      ${b.id==='staff'||b.id==='events'?`<div class="route"></div><span class="stop" style="left:10%;top:55%"></span><span class="stop" style="left:36.6%;top:55%"></span><span class="stop" style="left:63.3%;top:55%"></span><span class="stop" style="left:90%;top:55%"></span><div class="bus-run" data-bus></div>`
+      : b.id==='fleet'?`<div class="ring-wrap"><svg viewBox="0 0 160 160"><circle class="ring-bg" cx="80" cy="80" r="70"/><circle class="ring-fg" cx="80" cy="80" r="70"/></svg><div class="bolt"><svg style="color:#FF73B3"><use href="#i-bolt"/></svg></div></div>`
+      : `<div class="skyline"></div><div class="road"></div><div class="car-run" data-car="driver"></div>`}
+    </div>
+  </div></section>
+  <section class="sec light"><div class="wrap">
+    <div class="pm-grid"><div class="pm-card rv"><span class="k">The problem</span><p>${b.problem}</p></div><div class="pm-card rv" style="background:var(--purple);border-color:var(--purple)"><span class="k" style="color:var(--pink-hi)">How BvndleGo solves it</span><p style="color:#fff">${b.model}</p></div></div>
+    <div style="margin-top:56px"><span class="eyebrow">How we deliver</span>
+      <ol class="proc">${b.steps.map((s,i)=>`<li><span class="pn">${i+1}</span><b>${s[0]}</b><p>${s[1]}</p></li>`).join('')}</ol>
+    </div>
+  </div></section>
+  <section class="sec formsec" id="bf-${b.id}"><div class="wrap">
+    <div class="sticky"><span class="eyebrow">${b.name}</span><h2>Request a Corporate Mobility Proposal.</h2><p class="lead">A few quick details. The team will come back with a proposal.</p></div>
+    <div class="fpanel" data-form="biz" data-preset="${b.need}"></div>
+  </div></section>
+</div>`).join('');
+
+paintWheels();
+$$('[data-car]').forEach(el => el.innerHTML = carSVG(!!el.dataset.car));
 $$('[data-bus]').forEach(el => el.innerHTML = busSVG());
+
+/* Scroll turns the logo wheel */
+const scrollWheels = $$('[data-scrollwheel] .blades');
+addEventListener('scroll', () => { const d = scrollY * .6; scrollWheels.forEach(b => b.style.transform = `rotate(${d}deg)`); }, {passive:true});
+
+/* ---------- Coverage + support (from CONFIG) ---------- */
+$$('[data-coverage]').forEach(el => el.textContent = CONFIG.coverage);
+const S = CONFIG.support;
+const supportRows = [['Phone',S.phone],['WhatsApp',S.whatsapp],['Email',S.email],['Support hours',S.hours]].filter(r=>r[1]);
+$$('[data-support]').forEach(el => el.innerHTML = supportRows.length
+  ? `<div class="support-list">${supportRows.map(([k,v])=>`<div>${k}<span>${v}</span></div>`).join('')}</div>`
+  : `<h3>Talk to the team</h3><p>Send a request and choose phone, WhatsApp or email. The team will respond on the channel you pick.</p><div><button class="btn btn-go" data-move style="margin-top:6px"><span class="wheel">${wheelSVG()}</span>Contact BvndleGo</button></div>`);
+
+/* ---------- Trust ---------- */
+const TRUST = [
+  ['i-cash','Price and terms first','You see the price, any deposit and the terms before you commit.'],
+  ['i-check','No surprise bookings','A request is not a booking. Nothing is confirmed until you agree.'],
+  ['i-leaf','Electric fleet','EV-led cars, buses and charging across every service.'],
+  ['i-car','Self-drive or with a driver','Choose how you move with GoCar, subject to availability.'],
+  ['i-chat','Support your way','Pick phone, WhatsApp or email, and we respond there.'],
+  ['i-coin','Connected to Bvndle','Eligible activity earns Bvndle Coins on one identity.']
+];
+$('#trustGrid').innerHTML = TRUST.map(([ic,t,d])=>`<div class="tcard rv"><span class="ci"><svg><use href="#${ic}"/></svg></span><b>${t}</b><p>${d}</p></div>`).join('');
+
+/* ---------- Coins Q&A ---------- */
+const COINQ = [
+  ['What activity earns Coins?','Eligible GoCar hires, GoBus trips and GoCharge sessions.'],
+  ['How many Coins can I earn?','It depends on the activity. The Coins an eligible booking earns are shown with your quote, before you confirm.'],
+  ['Where can I use them?','On eligible future BvndleGo activity, and across the wider Bvndle rewards ecosystem at bvndle.com.'],
+  ['Are there rules, expiry dates or restrictions?','Not every transaction qualifies. Eligibility, any expiry and other restrictions follow the Bvndle reward rules, which are shown before you confirm.'],
+  ['How do I link my Bvndle identity?','Add your Bvndle Tag when you make a request. New to Bvndle? You can create your identity as part of your first BvndleGo journey.']
+];
+$('#coinQA').innerHTML = COINQ.map(([q,a],i)=>`<div class="rv"><span class="qn">0${i+1}</span><b>${q}</b><p>${a}</p></div>`).join('');
 
 /* ---------- Marquee ---------- */
 const cues = ['Electric mobility','Technology-led','Cashless','Trackable','Rewarding'];
@@ -1006,24 +1259,13 @@ safe('Hero city canvas', () => {
 const cv = $('#city'), ctx = cv.getContext('2d');
 const stage=$('#stage'), board=$('#board');
 const W = 1000, H = 760;
-function cr(pts, seg=24){ // catmull-rom sample
-  const out=[];
-  for(let i=0;i<pts.length-1;i++){
-    const p0=pts[i-1]||pts[i], p1=pts[i], p2=pts[i+1], p3=pts[i+2]||p2;
+function cr(pts, seg=24){ const out=[];
+  for(let i=0;i<pts.length-1;i++){ const p0=pts[i-1]||pts[i], p1=pts[i], p2=pts[i+1], p3=pts[i+2]||p2;
     for(let t=0;t<seg;t++){const s=t/seg,s2=s*s,s3=s2*s;
       out.push([.5*((2*p1[0])+(-p0[0]+p2[0])*s+(2*p0[0]-5*p1[0]+4*p2[0]-p3[0])*s2+(-p0[0]+3*p1[0]-3*p2[0]+p3[0])*s3),
-                .5*((2*p1[1])+(-p0[1]+p2[1])*s+(2*p0[1]-5*p1[1]+4*p2[1]-p3[1])*s2+(-p0[1]+3*p1[1]-3*p2[1]+p3[1])*s3)]);}
-  }
-  out.push(pts[pts.length-1]); return out;
-}
-const roadDefs = [
-  [[-60,120],[200,150],[420,90],[650,170],[1060,120]],
-  [[90,-60],[150,200],[250,380],[290,800]],
-  [[-60,430],[220,400],[480,330],[760,390],[1060,350]],
-  [[560,-60],[520,190],[610,340],[700,520],[730,800]],
-  [[880,-60],[830,210],[900,430],[1060,560]],
-  [[-60,640],[260,600],[520,660],[800,610],[1060,660]]
-];
+                .5*((2*p1[1])+(-p0[1]+p2[1])*s+(2*p0[1]-5*p1[1]+4*p2[1]-p3[1])*s2+(-p0[1]+3*p1[1]-3*p2[1]+p3[1])*s3)]);} }
+  out.push(pts[pts.length-1]); return out; }
+const roadDefs = [[[-60,120],[200,150],[420,90],[650,170],[1060,120]],[[90,-60],[150,200],[250,380],[290,800]],[[-60,430],[220,400],[480,330],[760,390],[1060,350]],[[560,-60],[520,190],[610,340],[700,520],[730,800]],[[880,-60],[830,210],[900,430],[1060,560]],[[-60,640],[260,600],[520,660],[800,610],[1060,660]]];
 const roads = roadDefs.map(d => { const p = cr(d); const L=[0]; for(let i=1;i<p.length;i++) L.push(L[i-1]+Math.hypot(p[i][0]-p[i-1][0],p[i][1]-p[i-1][1])); return {p,L,len:L[L.length-1]}; });
 function at(r, d){ d = ((d % r.len)+r.len)%r.len; let lo=0,hi=r.L.length-1; while(lo<hi-1){const m=(lo+hi)>>1; if(r.L[m]<d) lo=m; else hi=m;} const a=r.p[lo],b=r.p[hi],f=(d-r.L[lo])/((r.L[hi]-r.L[lo])||1); return [a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f,Math.atan2(b[1]-a[1],b[0]-a[0])]; }
 const lagoon = cr([[-60,560],[160,520],[380,575],[620,540],[820,585],[1060,545]],20);
@@ -1031,38 +1273,31 @@ let seed=7; const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
 const blocks=[]; for(let i=0;i<70;i++){blocks.push([rnd()*W,rnd()*500,20+rnd()*50,16+rnd()*40,rnd()]);}
 const chargers=[[330,250],[700,250],[150,470],[870,470]];
 const vehicles=[]; roads.forEach((r,ri)=>{ const n= ri===5?2:3; for(let k=0;k<n;k++) vehicles.push({r,d:rnd()*r.len,v:(.7+rnd()*.9)*(rnd()>.5?1:-1),bus:rnd()<.35,trail:[]}); });
-
-size = () => { const dpr=Math.min(devicePixelRatio||1,2); const w=cv.clientWidth||cv.parentNode.offsetWidth, h=cv.clientHeight||cv.parentNode.offsetHeight; cv.width=Math.max(1,Math.round(w*dpr)); cv.height=Math.max(1,Math.round(h*dpr)); };
-size(); addEventListener('resize', () => size());
 let tick=0;
+size = () => { const dpr=Math.min(devicePixelRatio||1,2); const w=cv.clientWidth||board.offsetWidth, h=cv.clientHeight||board.offsetHeight; cv.width=Math.max(1,Math.round(w*dpr)); cv.height=Math.max(1,Math.round(h*dpr)); };
+size(); addEventListener('resize', () => size());
 function draw(){
   const cw=cv.width,ch=cv.height; const s=Math.max(cw/W,ch/H);
   ctx.setTransform(s,0,0,s,(cw-W*s)/2,(ch-H*s)/2);
   ctx.fillStyle='#331650'; ctx.fillRect(-50,-50,W+100,H+100);
-  // blocks
   blocks.forEach(b=>{ctx.fillStyle=`rgba(255,255,255,${.03+b[4]*.05})`; ctx.beginPath(); ctx.roundRect(b[0],b[1],b[2],b[3],4); ctx.fill();});
-  // lagoon
   ctx.beginPath(); ctx.moveTo(-60,H+60); lagoon.forEach(p=>ctx.lineTo(p[0],p[1])); ctx.lineTo(W+60,H+60); ctx.closePath();
   const lg=ctx.createLinearGradient(0,520,0,H); lg.addColorStop(0,'#5A2E80'); lg.addColorStop(1,'#3E1C5C'); ctx.fillStyle=lg; ctx.fill();
   ctx.strokeStyle='rgba(255,255,255,.08)'; ctx.lineWidth=2;
   for(let k=0;k<4;k++){ctx.beginPath(); lagoon.forEach((p,i)=>{const y=p[1]+30+k*40+Math.sin(i*.25+tick*.02+k)*4; i?ctx.lineTo(p[0],y):ctx.moveTo(p[0],y);}); ctx.stroke();}
-  // roads
   roads.forEach(r=>{ctx.beginPath(); r.p.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));
     ctx.strokeStyle='#1E0A30'; ctx.lineWidth=26; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke();
     ctx.strokeStyle='rgba(255,255,255,.22)'; ctx.lineWidth=1.5; ctx.setLineDash([10,12]); ctx.lineDashOffset=-tick*.6; ctx.stroke(); ctx.setLineDash([]);});
-  // chargers
   chargers.forEach((c,i)=>{const ph=((tick*.015)+i*.25)%1; ctx.beginPath(); ctx.arc(c[0],c[1],10+ph*30,0,7); ctx.strokeStyle=`rgba(233,60,142,${.7*(1-ph)})`; ctx.lineWidth=3; ctx.stroke();
     ctx.beginPath(); ctx.arc(c[0],c[1],12,0,7); ctx.fillStyle='#E93C8E'; ctx.fill();
     ctx.fillStyle='#fff'; ctx.beginPath(); ctx.moveTo(c[0]+1.5,c[1]-8); ctx.lineTo(c[0]-5,c[1]+1); ctx.lineTo(c[0]-.5,c[1]+1); ctx.lineTo(c[0]-1.5,c[1]+8); ctx.lineTo(c[0]+5,c[1]-1); ctx.lineTo(c[0]+.5,c[1]-1); ctx.fill();});
-  // vehicles
   vehicles.forEach(v=>{
     v.d+=v.v*(v.bus?.9:1.6)*(RM?.5:1);
     const [x,y,a]=at(v.r,v.d); const ang=v.v<0?a+Math.PI:a; const off=v.v<0?-6:6;
     const nx=x+Math.cos(a+Math.PI/2)*off, ny=y+Math.sin(a+Math.PI/2)*off;
     v.trail.push([nx,ny]); if(v.trail.length>(v.bus?14:22)) v.trail.shift();
     for(let i=1;i<v.trail.length;i++){const p=v.trail[i-1],q=v.trail[i]; if(Math.hypot(q[0]-p[0],q[1]-p[1])>30) continue; ctx.strokeStyle=`rgba(255,115,179,${i/v.trail.length*.55})`; ctx.lineWidth=v.bus?5:3.5; ctx.beginPath(); ctx.moveTo(p[0],p[1]); ctx.lineTo(q[0],q[1]); ctx.stroke();}
-    ctx.save(); ctx.translate(nx,ny); ctx.rotate(ang);
-    ctx.shadowColor='rgba(255,115,179,.9)'; ctx.shadowBlur=12;
+    ctx.save(); ctx.translate(nx,ny); ctx.rotate(ang); ctx.shadowColor='rgba(255,115,179,.9)'; ctx.shadowBlur=12;
     if(v.bus){ctx.fillStyle='#fff'; ctx.beginPath(); ctx.roundRect(-16,-6,32,12,3); ctx.fill(); ctx.shadowBlur=0; ctx.fillStyle='#E93C8E'; ctx.fillRect(-16,-1.5,32,3);}
     else {ctx.fillStyle='#E93C8E'; ctx.beginPath(); ctx.roundRect(-9,-5,18,10,3); ctx.fill(); ctx.shadowBlur=0; ctx.fillStyle='#fff'; ctx.fillRect(1,-3.5,4,7);}
     ctx.restore();
@@ -1070,43 +1305,21 @@ function draw(){
   tick++;
 }
 let heroVisible=true;
-new IntersectionObserver(e=>heroVisible=e[0].isIntersecting).observe($('#stage'));
+new IntersectionObserver(e=>heroVisible=e[0].isIntersecting).observe(stage);
 const homeView=$('[data-view="home"]');
 function loop(t){ if(heroVisible && !homeView.hidden){ draw(); if(TOUCH && !RM){ board.style.setProperty('--rz',(-22+Math.sin(t/2600)*7)+'deg'); board.style.setProperty('--rx',(48+Math.sin(t/3400)*5)+'deg'); } } requestAnimationFrame(loop); }
 requestAnimationFrame(loop);
-
-// tilt with pointer
-stage.addEventListener('pointermove',e=>{ if(e.pointerType!=='mouse') return;const b=stage.getBoundingClientRect(); const x=(e.clientX-b.left)/b.width-.5, y=(e.clientY-b.top)/b.height-.5; board.style.setProperty('--rz',(-22+x*14)+'deg'); board.style.setProperty('--rx',(48-y*14)+'deg');});
-stage.addEventListener('pointerleave',()=>{board.style.removeProperty('--rz'); board.style.removeProperty('--rx');});
-// HUD ticks
-let eta=6, hp=64;
-setInterval(()=>{ hp = hp>=99?41:hp+1; $('#hudpct').textContent=hp; }, 900);
-setInterval(()=>{ eta = eta<=1?7:eta-1; $('#eta').textContent=eta; }, 3500);
+const hr=$('.hero');
+hr.addEventListener('pointermove',e=>{ if(e.pointerType!=='mouse') return; const b=stage.getBoundingClientRect(); const x=(e.clientX-b.left)/b.width-.5, y=(e.clientY-b.top)/b.height-.5; board.style.setProperty('--rz',(-22+x*10)+'deg'); board.style.setProperty('--rx',(48-y*10)+'deg');});
+hr.addEventListener('pointerleave',()=>{board.style.removeProperty('--rz'); board.style.removeProperty('--rx');});
 });
 
-/* ---------- GoCar mock ---------- */
-safe('GoCar mock', () => {
+/* ---------- GoCar illustration ---------- */
+safe('GoCar illustration', () => {
 const carShow=$('#carShow');
-$$('input[name="m-drive"]').forEach(r=>r.addEventListener('change',()=>{carShow.dataset.mode=r.value; const cb=$('.car-big',carShow); cb.animate([{transform:'translateX(-50%)'},{transform:'translateX(-46%) rotate(-2deg)'},{transform:'translateX(-50%)'}],{duration:500,easing:'ease-out'});}));
+$$('input[name="m-drive"]').forEach(r=>r.addEventListener('change',()=>{carShow.dataset.mode=r.value; $('.car-big',carShow).animate([{transform:'translateX(-50%)'},{transform:'translateX(-46%) rotate(-2deg)'},{transform:'translateX(-50%)'}],{duration:500,easing:'ease-out'});}));
 const durLabels=['2 hours','4 hours','8 hours','12 hours','1 day','2 days','3 days','4 days','5 days','1 week','2 weeks','1 month'];
 const durR=$('#durRange'), durO=$('#durOut'); const setDur=()=>durO.textContent=durLabels[durR.value-1]; durR.addEventListener('input',setDur); setDur();
-});
-
-/* ---------- GoBus mock ---------- */
-safe('GoBus mock', () => {
-const bp=$('#busPath'), bpd=$('#busPathDone'), bd=$('#busDot'); const bl=bp.getTotalLength();
-bpd.style.strokeDasharray=bl; let bt=0;
-function busLoop(){ bt=(bt+.0016)%1; const L=bt*bl; const p=bp.getPointAtLength(L); bd.setAttribute('transform',`translate(${p.x},${p.y})`); bpd.style.strokeDashoffset=bl-L;
-  const seg=bt*3%1; $('#busProg').style.width=(seg*100)+'%'; $('#busEta').textContent=Math.max(1,Math.ceil((1-seg)*4))+' min';
-  requestAnimationFrame(busLoop); }
-busLoop();
-});
-
-/* ---------- GoCharge mock ---------- */
-safe('GoCharge mock', () => {
-const ring=$('#ringLive'), pct=$('#pctLive'); let cp=12;
-const setRing=()=>{ring.style.strokeDashoffset=440-440*cp/100; pct.textContent=cp+'%';};
-setRing(); setInterval(()=>{cp=cp>=100?12:cp+1; setRing();},260);
 });
 
 /* ---------- Rewards coins ---------- */
@@ -1125,7 +1338,6 @@ $$('[data-wallet]').forEach(w=>{
     }
   }
   $$('[data-earn]',w).forEach(b=>b.addEventListener('click',()=>fly(b)));
-  // ambient earning while visible
   let vis=false; new IntersectionObserver(e=>vis=e[0].isIntersecting,{threshold:.5}).observe(w);
   const acts=$$('[data-earn]',w); let k=0;
   setInterval(()=>{ if(vis && !w.closest('.view').hidden && document.visibilityState==='visible'){ fly(acts[k++%acts.length]); } },2600);
@@ -1135,20 +1347,19 @@ $$('[data-wallet]').forEach(w=>{
 /* ---------- How it works road ---------- */
 safe('How it works road', () => {
 const hp_=$('#howPath'), hd=$('#howDone'), hc=$('#howCar'); const hl=hp_.getTotalLength(); hd.style.strokeDasharray=hl;
-const marks=$('#howMarks'); [0,.25,.5,.75,1].forEach((f,i)=>{const p=hp_.getPointAtLength(f*hl); marks.insertAdjacentHTML('beforeend',`<circle cx="${p.x}" cy="${p.y}" r="10" fill="#fff" stroke="#E93C8E" stroke-width="4"/>`);});
+const marks=$('#howMarks'); [0,.25,.5,.75,1].forEach(f=>{const p=hp_.getPointAtLength(f*hl); marks.insertAdjacentHTML('beforeend',`<circle cx="${p.x}" cy="${p.y}" r="10" fill="#fff" stroke="#E93C8E" stroke-width="4"/>`);});
 howUpdate = () => { const el=$('#howRoad'); const b=el.getBoundingClientRect(); const vh=innerHeight; let f=(vh*.85-b.top)/(vh*.7); f=Math.max(0,Math.min(1,f)); const p=hp_.getPointAtLength(f*hl); hc.setAttribute('transform',`translate(${p.x},${p.y})`); hd.style.strokeDashoffset=hl-f*hl; };
 addEventListener('scroll',()=>howUpdate(),{passive:true}); howUpdate();
 });
 
 /* ---------- Business orbit ---------- */
 safe('Business orbit', () => {
-const orbit=$('#orbit');
-orbit.outerHTML=`<svg viewBox="0 0 400 400" style="position:relative;width:86%;height:86%" aria-hidden="true">
+$('#orbit').outerHTML=`<svg viewBox="0 0 400 400" style="position:relative;width:86%;height:86%" aria-hidden="true">
   <circle cx="200" cy="200" r="150" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="2" stroke-dasharray="4 10"/>
   <circle cx="200" cy="200" r="95" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="2"/>
-  <g transform="translate(150 150) scale(1)">${wheelSVG().replace('<svg ','<svg width="100" height="100" ')}</g>
+  <g transform="translate(150 150)">${wheelSVG().replace('<svg ','<svg width="100" height="100" ')}</g>
   <g><animateTransform attributeName="transform" type="rotate" from="0 200 200" to="360 200 200" dur="18s" repeatCount="indefinite"/>
-    ${[['i-bus',0],['i-car',120],['i-bolt',240]].map(([ic,a])=>{const r=a*Math.PI/180; const x=200+150*Math.cos(r), y=200+150*Math.sin(r); return `<g transform="translate(${x} ${y})"><g><animateTransform attributeName="transform" type="rotate" from="0" to="-360" dur="18s" repeatCount="indefinite"/><circle r="30" fill="#E93C8E"/><use href="#${ic}" x="-14" y="-14" width="28" height="28" style="color:#fff"/></g></g>`;}).join('')}
+    ${[['i-bus',0],['i-car',90],['i-bolt',180],['i-flag',270]].map(([ic,a])=>{const r=a*Math.PI/180; const x=200+150*Math.cos(r), y=200+150*Math.sin(r); return `<g transform="translate(${x} ${y})"><g><animateTransform attributeName="transform" type="rotate" from="0" to="-360" dur="18s" repeatCount="indefinite"/><circle r="30" fill="#E93C8E"/><use href="#${ic}" x="-14" y="-14" width="28" height="28" style="color:#fff"/></g></g>`;}).join('')}
   </g>
   <g><animateTransform attributeName="transform" type="rotate" from="360 200 200" to="0 200 200" dur="11s" repeatCount="indefinite"/>
     ${[['i-people',60],['i-route',180],['i-radar',300]].map(([ic,a])=>{const r=a*Math.PI/180; const x=200+95*Math.cos(r), y=200+95*Math.sin(r); return `<g transform="translate(${x} ${y})"><circle r="20" fill="#fff"/><use href="#${ic}" x="-10" y="-10" width="20" height="20" style="color:#4B2467"/></g>`;}).join('')}
@@ -1157,114 +1368,154 @@ orbit.outerHTML=`<svg viewBox="0 0 400 400" style="position:relative;width:86%;h
 });
 
 /* ---------- About belief ---------- */
-safe('About belief', () => {
-const bel=$$('#belief .e'); let bi=0; setInterval(()=>{bel.forEach((e,i)=>e.classList.toggle('on',i===bi)); bi=(bi+1)%bel.length;},1400);
-});
+safe('About belief', () => { const bel=$$('#belief .e'); let bi=0; setInterval(()=>{bel.forEach((e,i)=>e.classList.toggle('on',i===bi)); bi=(bi+1)%bel.length;},1400); });
 
 /* ---------- FAQs ---------- */
 const FAQ=[
-['What is BvndleGo?','BvndleGo is a technology-powered mobility company providing connected services across electric car hire, shuttle transportation and EV charging through GoCar, GoBus and GoCharge.'],
-['Who is BvndleGo for?','Individuals who need flexible personal mobility, commuters who want a more dependable ride, EV owners who need charging, and organisations that need staff, executive or fleet mobility solutions.'],
-['What is GoCar?','GoCar is BvndleGo’s car-as-a-service offering for flexible electric vehicle hire, including self-drive and driver-supported options where available.'],
-['What is GoBus?','GoBus is BvndleGo’s bus and shuttle service for individual commuters, corporate staff transportation and group or event movement.'],
-['What is GoCharge?','GoCharge is BvndleGo’s EV charging service for individual EV users, fleets and businesses.'],
-['Do I need to be a Bvndle user to use BvndleGo?','The mobility journey should remain simple for new customers. Where an account is required, you can create the underlying Bvndle identity as part of the journey. Existing Bvndle users can sign in with their existing identity/Tag where enabled.'],
-['What is a Bvndle Tag?','A Bvndle Tag is your identity within the Bvndle ecosystem. It can help connect your BvndleGo activity and rewards to the same profile.'],
-['How do Bvndle Coins work on BvndleGo?','Eligible BvndleGo activity can earn Bvndle Coins. The exact earning and redemption rules should be shown clearly before confirmation of an eligible transaction.'],
-['Can I use Bvndle Coins outside BvndleGo?','BvndleGo connects into the wider Bvndle ecosystem. Available redemption options and current rules should be viewed through the Bvndle experience.'],
-['Can companies use BvndleGo?','Yes. BvndleGo can support staff shuttle programmes, executive vehicle hire and fleet or charging requirements.'],
-['Can BvndleGo design staff routes for my company?','Yes. Share your headcount, key employee origin areas, work location and operating times, and the team can assess an appropriate route plan.'],
-['Can I hire a vehicle with a driver?','GoCar should allow customers to indicate whether they need self-drive or a driver-supported hire, subject to vehicle and service availability.'],
-['Can I use GoBus for an event or group?','Yes. Group and event transport can be submitted as a GoBus request, with the trip details and expected passenger count.'],
-['How do I find a GoCharge location?','Use the GoCharge experience to view available charging access and the relevant location information.'],
-['Is BvndleGo only for electric mobility?','The current BvndleGo proposition is EV-led and is designed around sustainable transportation across its core service lines.'],
-['How do I book?','Choose GoCar, GoBus or GoCharge, select ‘Move Better’ or the service CTA, and complete the short form relevant to what you need.'],
-['How will BvndleGo contact me after an enquiry?','You choose your preferred contact method in the form so the team can respond through the channel that works for you.'],
-['What information do I need to provide?','Only information needed to progress the request: who you are, what service you need, where/when relevant, and how you want to be contacted.'],
-['Why should I choose BvndleGo?','Because the experience is designed around simpler booking, more predictable mobility, technology-enabled visibility, EV-led transportation and rewards that can give something back when you move.'],
-['Where is BvndleGo available?','The current strategy starts with Lagos. The website should show live service areas, routes and charging locations rather than imply availability where it has not been confirmed.']
+['General','What is BvndleGo?','BvndleGo is a technology-powered mobility company providing connected services across electric car hire, shuttle transportation and EV charging through GoCar, GoBus and GoCharge.'],
+['General','Who is BvndleGo for?','Individuals who need flexible personal mobility, commuters who want a more dependable ride, EV owners who need charging, and organisations that need staff, executive or fleet mobility solutions.'],
+['General','Where is BvndleGo available?','BvndleGo is starting in Lagos. Send a request with your location and the team will confirm what is available to you.'],
+['General','Is BvndleGo only for electric mobility?','BvndleGo is EV-led and designed around sustainable transportation across its core services.'],
+['General','How do I book?','Choose GoCar, GoBus or GoCharge, select the action for that service, and complete the short form. The team then confirms availability, price and terms with you.'],
+['General','Is a request the same as a confirmed booking?','No. A request tells us what you need. Your booking is confirmed only after the team confirms availability, price and terms, and you agree.'],
+['General','How will BvndleGo contact me after a request?','You choose phone, WhatsApp or email in the form, and the team responds on that channel.'],
+['General','What information do I need to provide?','Only what is needed to progress the request: who you are, what service you need, where and when, and how you want to be contacted.'],
+['Pricing & payment','How much does it cost?','Prices depend on the service, vehicle, duration or route. The team confirms your price before you commit to anything.'],
+['Pricing & payment','Do I need to pay a deposit?','Some hires may need a deposit. If yours does, the amount and terms are shared with your quote before you confirm.'],
+['Pricing & payment','How do I pay?','BvndleGo is cashless. Payment options are shared with your quote and confirmation.'],
+['Pricing & payment','Can I cancel or change a booking?','Cancellation and change terms are shared with your quote, so you know them before you confirm.'],
+['Pricing & payment','How do refunds work?','Refund terms are included with your quote and confirmation.'],
+['GoCar','What is GoCar?','GoCar is BvndleGo’s car-as-a-service offering for flexible electric vehicle hire, including self-drive and driver-supported options.'],
+['GoCar','Can I hire a vehicle with a driver?','Yes. Choose self-drive or with a driver when you request, subject to vehicle and service availability.'],
+['GoCar','What do I need to hire a car?','The rental requirements for your hire are shared with your quote, before you confirm.'],
+['GoCar','What if I am running late for pickup?','Contact the team on your chosen channel as soon as you can, and they will help you adjust your pickup where possible.'],
+['GoBus','What is GoBus?','GoBus is BvndleGo’s bus and shuttle service for individual commuters, corporate staff transportation and group or event movement.'],
+['GoBus','How do I find a route?','Tell us your start point, destination and travel times. The team will match you to a GoBus route, or let you know when one opens near you.'],
+['GoBus','Can I use GoBus for an event or group?','Yes. Submit a group or event request with the trip details and expected passenger count.'],
+['GoCharge','What is GoCharge?','GoCharge is BvndleGo’s EV charging service for individual EV users, fleets and businesses.'],
+['GoCharge','How do I find a GoCharge location?','Charging locations are published on this site as they are verified. Register your interest with your area and the team will tell you about charging access near you.'],
+['GoCharge','Is my EV compatible with GoCharge?','Tell us your vehicle and connector type in the GoCharge form, and the team will confirm compatibility for the location you need.'],
+['Rewards','Do I need to be a Bvndle user to use BvndleGo?','No. Where an account is required, you can create your Bvndle identity as part of the journey. Existing Bvndle users can sign in with their Tag where enabled.'],
+['Rewards','What is a Bvndle Tag?','A Bvndle Tag is your identity within the Bvndle ecosystem. It connects your BvndleGo activity and rewards to the same profile.'],
+['Rewards','How do Bvndle Coins work on BvndleGo?','Eligible BvndleGo activity can earn Bvndle Coins. The Coins and rules that apply are shown before you confirm an eligible transaction.'],
+['Rewards','Can I use Bvndle Coins outside BvndleGo?','Yes, BvndleGo connects into the wider Bvndle ecosystem. Current redemption options and rules are available through Bvndle.'],
+['Business','Can companies use BvndleGo?','Yes. BvndleGo supports staff shuttle programmes, executive vehicle hire, fleet charging and event movement.'],
+['Business','Can BvndleGo design staff routes for my company?','Yes. Share your headcount, key employee origin areas, work location and operating times, and the team will assess an appropriate route plan.'],
+['General','Why should I choose BvndleGo?','Simpler booking, more predictable mobility, technology-enabled visibility, EV-led transportation and rewards that give something back when you move.']
 ];
-$('#faq').innerHTML=FAQ.map(([q,a],i)=>`<details${i===0?' open':''}><summary>${q}<span class="pm"><svg width="16" height="16"><use href="#i-plus"/></svg></span></summary><p class="ans">${a}</p></details>`).join('');
+const TOP=['Is a request the same as a confirmed booking?','How much does it cost?','Can I cancel or change a booking?','Where is BvndleGo available?','Can I hire a vehicle with a driver?'];
+const faqItem=([c,q,a],open)=>`<details${open?' open':''}><summary>${q}<span class="pm"><svg width="16" height="16"><use href="#i-plus"/></svg></span></summary><p class="ans">${a}</p></details>`;
+$('#faqTop').innerHTML=TOP.map((q,i)=>faqItem(FAQ.find(f=>f[1]===q),i===0)).join('');
+const CATS=['All',...new Set(FAQ.map(f=>f[0]))];
+function renderFaq(cat){ const list=cat==='All'?CATS.slice(1):[cat];
+  $('#faq').innerHTML=list.map(c=>`<div class="faq-cat">${c}</div>`+FAQ.filter(f=>f[0]===c).map(f=>faqItem(f,false)).join('')).join('');
+  $$('#ftabs .ftab').forEach(b=>b.setAttribute('aria-pressed',b.dataset.cat===cat)); }
+$('#ftabs').innerHTML=CATS.map(c=>`<button class="ftab" data-cat="${c}" aria-pressed="false">${c}</button>`).join('');
+$('#ftabs').addEventListener('click',e=>{const b=e.target.closest('.ftab'); if(b) renderFaq(b.dataset.cat);});
+renderFaq('All');
 
 /* ---------- Forms ---------- */
 const METHOD={id:'method',label:'Preferred contact method',type:'seg',opts:['Phone','WhatsApp','Email'],meta:'method',full:1};
-const TAG={id:'tag',label:'Bvndle Tag (optional)',type:'text',ph:'@yourtag',meta:'tag'};
+const TAG={id:'tag',label:'Bvndle Tag (optional)',ph:'@yourtag',meta:'tag'};
 const FORMS={
-  car:{name:'GoCar',icon:'i-car',sub:'Get a car.',submit:()=>'Find My Car',fields:[
-    {id:'name',label:'Name',req:1},{id:'contact',label:'Phone / Email',req:1},TAG,
-    {id:'pickup',label:'Pickup location',full:1},
+  car:{name:'GoCar',icon:'i-car',label:'Book a Car',sub:'Electric car hire, self-drive or with a driver.',submit:()=>'Request My Car',fields:[
+    {id:'pickup',label:'Pickup location',full:1,ph:'Area or address'},
     {id:'start',label:'Start date/time',type:'datetime-local'},{id:'end',label:'End date/time',type:'datetime-local'},
-    {id:'vehicle',label:'Vehicle preference'},{id:'drive',label:'Self-drive / With driver',type:'seg',opts:['Self-drive','With driver']},
+    {id:'drive',label:'Self-drive / With driver',type:'seg',opts:['Self-drive','With driver'],def:'Self-drive'},{id:'vehicle',label:'Vehicle preference',ph:'Any EV'},
+    {id:'name',label:'Name',req:1},{id:'contact',label:'Phone / Email',req:1},TAG,
     {id:'notes',label:'Anything else?',type:'textarea',full:1},METHOD]},
-  bus:{name:'GoBus',icon:'i-bus',sub:'Get a seat or move your team.',submit:v=>v.who==='Me'?'Find My Route':'Move My Team',fields:[
-    {id:'who',label:'Who are we moving?',type:'seg',opts:['Me','My employees','A group or event'],full:1,def:'Me'},
-    {id:'from',label:'From',show:['who','Me']},{id:'to',label:'To',show:['who','Me']},
-    {id:'schedule',label:'Schedule',ph:'e.g. weekday mornings',show:['who','Me']},{id:'freq',label:'Frequency',type:'seg',opts:['One trip','Daily','Subscription'],show:['who','Me']},
-    {id:'company',label:'Company',show:['who','My employees']},{id:'headcount',label:'Headcount',type:'number',show:['who','My employees']},
-    {id:'origins',label:'Origin clusters / routes',full:1,show:['who','My employees']},{id:'workloc',label:'Work location',show:['who','My employees']},
-    {id:'days',label:'Days / times',show:['who','My employees']},{id:'challenge',label:'Current transport challenge',type:'textarea',full:1,show:['who','My employees']},
-    {id:'trip',label:'Trip details',type:'textarea',full:1,show:['who','A group or event']},{id:'pax',label:'Expected passenger count',type:'number',show:['who','A group or event']},
+  bus:{name:'GoBus',icon:'i-bus',label:'Find a Bus Route',sub:'A seat on a route, or a group charter.',submit:v=>v.who==='A group or event'?'Request a Charter':v.who==='My employees'?'Request a Proposal':'Find My Bus Route',fields:[
+    {id:'who',label:'Who are we moving?',type:'seg',opts:['Me','A group or event','My employees'],full:1,def:'Me'},
+    {id:'from',label:'From',ph:'Start point',show:['who','Me']},{id:'to',label:'To',ph:'Destination',show:['who','Me']},
+    {id:'depart',label:'Usual travel times',ph:'e.g. leave 6:30am, return 6pm',show:['who','Me']},{id:'freq',label:'How often',type:'seg',opts:['One trip','Daily','Subscription'],def:'Daily',show:['who','Me']},
+    {id:'trip',label:'Trip details',type:'textarea',full:1,ph:'Pickup points and destination',show:['who','A group or event']},{id:'pax',label:'Expected passenger count',type:'number',show:['who','A group or event']},
     {id:'tripdate',label:'Date',type:'date',show:['who','A group or event']},
+    {id:'company',label:'Company',show:['who','My employees']},{id:'headcount',label:'Headcount',type:'number',show:['who','My employees']},
+    {id:'origins',label:'Employee origin areas',full:1,show:['who','My employees']},{id:'workloc',label:'Work location',show:['who','My employees']},{id:'shifts',label:'Shift / operating times',show:['who','My employees']},
     {id:'name',label:'Name / Contact person',req:1},{id:'contact',label:'Phone / Email',req:1},TAG,METHOD]},
-  charge:{name:'GoCharge',icon:'i-bolt',sub:'Find power.',submit:v=>v.need==='Charge my EV'?'Find a Charger':v.need==='Charge a fleet'?'Charge My Fleet':'Send Request',fields:[
+  charge:{name:'GoCharge',icon:'i-bolt',label:'Find EV Charging',sub:'Charging for your EV, your fleet or your site.',submit:v=>v.need==='Charge a fleet'?'Enquire About Fleet Charging':v.need==='Discuss a charging site'?'Discuss a Charging Site':'Register Interest',fields:[
     {id:'need',label:'I need to',type:'seg',opts:['Charge my EV','Charge a fleet','Discuss a charging site'],full:1,def:'Charge my EV'},
-    {id:'location',label:'Location'},{id:'vtype',label:'Vehicle / fleet type'},
+    {id:'location',label:'Location',ph:'Area where you need charging'},{id:'vtype',label:'Vehicle / fleet type'},
+    {id:'connector',label:'Connector type',type:'seg',opts:['Type 2','CCS2','CHAdeMO','Not sure'],def:'Not sure',full:1},
     {id:'count',label:'Number of vehicles',type:'number',show:['need','Charge a fleet|Discuss a charging site']},
     {id:'timing',label:'Timing / frequency'},
     {id:'name',label:'Name',req:1},{id:'contact',label:'Phone / Email',req:1},TAG,METHOD]},
-  biz:{name:'Business Mobility',icon:'i-brief',sub:'Mobility for my business.',submit:()=>'Build My Mobility Plan',fields:[
-    {id:'company',label:'Company',req:1},{id:'name',label:'Contact person',req:1},{id:'role',label:'Role'},
-    {id:'email',label:'Email',type:'email'},{id:'contact',label:'Phone',type:'tel',req:1},
-    {id:'need',label:'What do you need?',type:'seg',opts:['Staff shuttle','Executive hire','Fleet charging','Multiple services'],full:1,def:'Staff shuttle'},
-    {id:'size',label:'Headcount / fleet size',type:'number'},{id:'routes',label:'Main routes / locations'},
-    {id:'startdate',label:'Start date',type:'date'},METHOD,
-    {id:'info',label:'Additional information',type:'textarea',full:1}]}
+  biz:{name:'BvndleGo for Business',icon:'i-brief',label:'Business Mobility',sub:'Staff, executive, fleet or event mobility.',submit:()=>'Request My Proposal',fields:[
+    {id:'company',label:'Company',req:1},{id:'name',label:'Contact person',req:1},{id:'contact',label:'Phone / Email',req:1},
+    {id:'need',label:'Service required',type:'seg',opts:['Staff transport','Executive car hire','Fleet charging','Event & group movement','Multiple services'],full:1,def:'Staff transport'},
+    {id:'location',label:'Location(s)'},{id:'volume',label:'Approximate volume',ph:'Staff, vehicles or passengers'},
+    {id:'startdate',label:'Expected start date',type:'date'},METHOD,
+    {id:'info',label:'Anything else? (optional)',type:'textarea',full:1}]}
 };
+const esc = s => String(s??'').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function fieldHTML(f,pre,val){
   const id=`${pre}-${f.id}`; const cls=`fld${f.full||f.type==='textarea'?' full':''}`; const show=f.show?` data-show="${f.show[0]}=${f.show[1]}"`:'';
-  if(f.type==='seg'){ const cur=val??f.def; return `<div class="${cls}"${show} role="radiogroup" aria-label="${f.label}"><span>${f.label}</span><div class="seg">${f.opts.map((o,i)=>`<label><input type="radio" name="${id}" id="${id}-${i}" value="${o}"${o===cur?' checked':''}><span>${o}</span></label>`).join('')}</div></div>`; }
+  if(f.type==='seg'){ const cur=val??f.def; return `<div class="${cls}"${show} role="radiogroup" aria-label="${f.label}"><span>${f.label}</span><div class="seg">${f.opts.map((o,i)=>`<label${o===cur?' class="on"':''}><input type="radio" name="${id}" id="${id}-${i}" value="${o}"${o===cur?' checked':''}><span>${o}</span></label>`).join('')}</div></div>`; }
   const ph=f.ph?` placeholder="${f.ph}"`:'';
-  if(f.type==='textarea') return `<label class="${cls}"${show}><span>${f.label}</span><textarea id="${id}" name="${f.id}"${ph}>${val||''}</textarea></label>`;
-  return `<label class="${cls}"${show}><span>${f.label}${f.req?' *':''}</span><input id="${id}" name="${f.id}" type="${f.type||'text'}"${ph}${f.req?' required':''} value="${val||''}"></label>`;
+  if(f.type==='textarea') return `<label class="${cls}"${show}><span>${f.label}</span><textarea id="${id}" name="${f.id}"${ph}>${esc(val)}</textarea></label>`;
+  return `<label class="${cls}"${show}><span>${f.label}${f.req?' *':''}</span><input id="${id}" name="${f.id}" type="${f.type||'text'}"${ph}${f.req?' required':''} value="${esc(val)}"></label>`;
 }
 function readVals(root,key,pre){ const v={}; FORMS[key].fields.forEach(f=>{ if(f.type==='seg'){const c=root.querySelector(`input[name="${pre}-${f.id}"]:checked`); if(c) v[f.id]=c.value;} else {const e=root.querySelector(`#${pre}-${f.id}`); if(e) v[f.id]=e.value;} }); return v; }
-function applyShow(root,key,pre){ const v=readVals(root,key,pre); $$('[data-show]',root).forEach(el=>{const [k,opts]=el.dataset.show.split('='); el.hidden=!opts.split('|').includes(v[k]);}); const sb=root.querySelector('[data-submit]'); if(sb) sb.lastChild.textContent=FORMS[key].submit(v); }
+function applyShow(root,key,pre){ const v=readVals(root,key,pre); $$('[data-show]',root).forEach(el=>{const [k,opts]=el.dataset.show.split('='); el.hidden=!opts.split('|').includes(v[k]);}); const sb=root.querySelector('[data-submit] .lbl'); if(sb) sb.textContent=FORMS[key].submit(v); }
 function validate(root){ let ok=true; $$('input[required]',root).forEach(i=>{ const box=i.closest('.fld'); if(box.hidden) return; const bad=!i.value.trim(); box.classList.toggle('err',bad); let m=box.querySelector('.msg'); if(bad&&!m){box.insertAdjacentHTML('beforeend','<span class="msg">Add this so we can reach you.</span>');} if(!bad&&m) m.remove(); if(bad&&ok){i.focus(); ok=false;} }); return ok; }
-const XSELL={car:[['GoCharge','gocharge'],['Rewards','rewards']],bus:[['GoCar','gocar'],['Rewards','rewards']],charge:[['GoCar','gocar'],['Rewards','rewards']],biz:[['GoBus','gobus'],['GoCharge','gocharge']]};
-function doneHTML(key,v){ const m=v.method||'your preferred channel'; return `<div class="done"><span class="wheel">${wheelSVG()}</span><h3>You're ready to Move Better.</h3><p>We've received your request.</p><p>Next: the ${FORMS[key].name} team will contact you by ${m}.</p><div class="xsell">${XSELL[key].map(([l,go])=>`<a href="#${go}" data-go="${go}">Explore ${l} →</a>`).join('')}</div></div>`; }
+const XSELL={car:[['GoCharge','gocharge'],['Rewards','rewards']],bus:[['GoCar','gocar'],['Rewards','rewards']],charge:[['GoCar','gocar'],['Fleet charging','biz-fleet']],biz:[['Staff transport','biz-staff'],['Fleet charging','biz-fleet']]};
+function doneHTML(key,v){ const m=v.method||'your preferred channel'; const what=key==='biz'?'a proposal':key==='charge'?'charging options':'availability, price and terms';
+  return `<div class="done"><span class="wheel">${wheelSVG()}</span><h3>You're ready to Move Better.</h3><p>We've received your request.</p>
+  <ol><li><b>The ${FORMS[key].name} team reviews it.</b></li><li><b>We contact you by ${esc(m)}</b> to confirm ${what}.</li><li><b>You decide.</b> Nothing is booked or charged until you agree.</li></ol>
+  <div class="xsell">${XSELL[key].map(([l,go])=>`<a href="#${go}" data-go="${go}">Explore ${l} →</a>`).join('')}</div></div>`; }
 function mountForm(panel){
-  const key=panel.dataset.form, pre='p'+key;
-  panel.innerHTML=`<form novalidate><div class="fgrid">${FORMS[key].fields.map(f=>fieldHTML(f,pre)).join('')}</div><div class="fsubmit"><button class="btn btn-go" type="submit" data-submit><span class="wheel">${wheelSVG()}</span>Submit</button><span class="fnote">* required</span></div></form>`;
+  const key=panel.dataset.form, pre='p'+key+(panel.dataset.preset?panel.dataset.preset.replace(/\W/g,''):'');
+  const preset=panel.dataset.preset?{need:panel.dataset.preset}:{};
+  panel.innerHTML=`<form novalidate><div class="fgrid">${FORMS[key].fields.map(f=>fieldHTML(f,pre,preset[f.id])).join('')}</div><div class="fsubmit"><button class="btn btn-go" type="submit" data-submit><span class="wheel">${wheelSVG()}</span><span class="lbl">Submit</span></button><span class="fnote">* required · nothing is booked until you confirm</span></div></form>`;
   const form=$('form',panel); form.addEventListener('change',()=>applyShow(form,key,pre)); applyShow(form,key,pre);
   form.addEventListener('submit',e=>{e.preventDefault(); if(!validate(form)) return; const v=readVals(form,key,pre); panel.innerHTML=doneHTML(key,v); panel.scrollIntoView({behavior:RM?'auto':'smooth',block:'center'});});
 }
 $$('[data-form]').forEach(mountForm);
-// preset buttons on service pages
-document.addEventListener('click',e=>{ const a=e.target.closest('[data-who],[data-need]'); if(!a) return; const key=a.dataset.who?'bus':'charge'; const fld=a.dataset.who?'who':'need'; const val=a.dataset.who||a.dataset.need; const panel=$(`[data-form="${key}"]`); const inp=$$(`input[name="p${key}-${fld}"]`,panel).find(i=>i.value===val); if(inp){inp.checked=true; applyShow($('form',panel),key,'p'+key);} });
+document.addEventListener('click',e=>{ const a=e.target.closest('[data-who],[data-need]'); if(!a) return; const key=a.dataset.who?'bus':'charge'; const fld=a.dataset.who?'who':'need'; const val=a.dataset.who||a.dataset.need; const panel=$(`[data-form="${key}"]`); const inp=$$(`input[name="p${key}-${fld}"]`,panel).find(i=>i.value===val); if(inp){inp.checked=true; applyShow($('form',panel),key,'p'+key); syncSeg(panel);} });
 
-/* ---------- Move Better router ---------- */
+/* ---------- Hero booking widget ---------- */
+const QUICK={
+  car:{fields:['pickup','start','end','drive'],note:'Request a booking. We confirm availability and price before anything is booked.'},
+  bus:{fields:['from','to','depart'],note:'Tell us your route. We match you to a GoBus route or tell you when one opens.'},
+  charge:{fields:['location','need'],note:'Charging locations are published as they are verified. Register interest now.'}
+};
+let bwTab='car';
+function renderBW(){
+  const q=QUICK[bwTab], fm=FORMS[bwTab];
+  $('#bwPane').innerHTML=`<div class="fgrid">${q.fields.map(id=>{const f=fm.fields.find(x=>x.id===id); return fieldHTML({...f,req:0,show:null,full:f.full||id==='need'||id==='drive'},'q'+bwTab);}).join('')}</div>`;
+  $('#bwNote').textContent=q.note;
+  $('#bwGo span:last-child').textContent={car:'Request a Car',bus:'Find My Bus Route',charge:'Find EV Charging'}[bwTab];
+  $$('.bw-tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.tab===bwTab));
+}
+$('.bw-tabs').addEventListener('click',e=>{const t=e.target.closest('.bw-tab'); if(t){bwTab=t.dataset.tab; renderBW();}});
+$('#bw').addEventListener('submit',e=>{e.preventDefault(); const v=readVals($('#bw'),bwTab,'q'+bwTab); Object.keys(v).forEach(k=>{if(v[k]==='') delete v[k];}); if(bwTab==='bus') v.who='Me'; openRouter(bwTab,v);});
+renderBW();
+
+/* ---------- Request flow ---------- */
 const R={el:$('#router'),svc:null,step:1,vals:{},tag:null,tagv:'',method:null,lastFocus:null};
-const OPTS=[['car','I need a Car','i-car','GoCar'],['bus','I need a Bus or Shuttle','i-bus','GoBus'],['charge','I need to Charge','i-bolt','GoCharge'],['biz','I need Mobility for my Business','i-brief','For Business']];
+const OPTS=['car','bus','charge','biz'];
 function track(){ const pct=(R.step-1)/4*100; $('#rFill').style.width=pct+'%'; const car=$('#rCar'); car.style.left=`calc(${pct}% * 0.94 + 20px)`; $('.wheel',car).style.transform=`rotate(${R.step*180}deg)`;
   $$('.dotstep',$('#rTrack')).forEach(d=>d.remove()); for(let i=0;i<5;i++){ $('#rTrack').insertAdjacentHTML('beforeend',`<span class="dotstep${i<R.step?' on':''}" style="left:calc(${i*25}% * 0.94 + 20px)"></span>`);} }
 function rRender(){
-  const T=$('#rTitle'),S=$('#rSub'),B=$('#rBody'),F=$('#rFoot'); track();
+  const T=$('#rTitle'),Sb=$('#rSub'),B=$('#rBody'),F=$('#rFoot'); track();
   const back=R.step>1&&R.step<5?`<button class="r-back" data-rback>← Back</button>`:'<span></span>';
-  if(R.step===1){ T.textContent='What do you need?'; S.textContent='Choose what you need. We will take care of the rest.';
-    B.innerHTML=`<div class="r-opts">${OPTS.map(([k,l,ic,s])=>`<button class="r-opt${R.svc===k?' sel':''}" data-pick="${k}"><span class="oi"><svg style="color:#fff"><use href="#${ic}"/></svg></span><span>${l}<small>${s}</small></span></button>`).join('')}</div>`; F.innerHTML='';
-  } else if(R.step===2){ const fm=FORMS[R.svc]; T.textContent=fm.name; S.textContent='Tell us what you need.';
+  const cont=(l='Continue')=>`<button class="btn btn-go" data-rnext><span class="wheel">${wheelSVG()}</span>${l}</button>`;
+  if(R.step===1){ T.textContent='What do you need?'; Sb.textContent='Choose a service. We will take care of the rest.';
+    B.innerHTML=`<div class="r-opts">${OPTS.map(k=>{const f=FORMS[k]; return `<button class="r-opt${R.svc===k?' sel':''}" data-pick="${k}"><span class="oi"><svg style="color:#fff"><use href="#${f.icon}"/></svg></span><span>${f.label}<small>${f.sub}</small></span></button>`;}).join('')}</div>`; F.innerHTML='';
+  } else if(R.step===2){ const fm=FORMS[R.svc]; T.textContent=fm.label; Sb.textContent='Tell us what you need. Nothing is booked until you confirm.';
     B.innerHTML=`<form id="rForm" novalidate><div class="fgrid">${fm.fields.filter(f=>!f.meta).map(f=>fieldHTML(f,'r'+R.svc,R.vals[f.id])).join('')}</div></form>`;
     const form=$('#rForm'); form.addEventListener('change',()=>applyShow(form,R.svc,'r'+R.svc)); applyShow(form,R.svc,'r'+R.svc);
     form.addEventListener('submit',e=>{e.preventDefault(); next();});
-    F.innerHTML=`${back}<button class="btn btn-go" data-rnext><span class="wheel">${wheelSVG()}</span>Continue</button>`;
-  } else if(R.step===3){ T.textContent='Do you have a Bvndle Tag?'; S.textContent='It connects your BvndleGo activity and rewards to one profile. It is optional.';
-    B.innerHTML=`<div class="r-opts"><button class="r-opt${R.tag==='yes'?' sel':''}" data-tag="yes"><span class="oi"><svg style="color:#fff"><use href="#i-tag"/></svg></span><span>Yes<small>Add my Tag</small></span></button><button class="r-opt${R.tag==='no'?' sel':''}" data-tag="no"><span class="oi"><svg style="color:#fff"><use href="#i-arrow"/></svg></span><span>No<small>Continue without one</small></span></button></div>${R.tag==='yes'?`<label class="fld" style="margin-top:14px"><span>Bvndle Tag</span><input id="rTag" placeholder="@yourtag" value="${R.tagv}"></label>`:''}`;
-    F.innerHTML=`${back}<button class="btn btn-go" data-rnext><span class="wheel">${wheelSVG()}</span>Continue</button>`;
+    F.innerHTML=back+cont();
+  } else if(R.step===3){ T.textContent='Do you have a Bvndle Tag?'; Sb.textContent='It connects your BvndleGo activity and rewards to one profile. It is optional.';
+    B.innerHTML=`<div class="r-opts"><button class="r-opt${R.tag==='yes'?' sel':''}" data-tag="yes"><span class="oi"><svg style="color:#fff"><use href="#i-tag"/></svg></span><span>Yes<small>Add my Tag</small></span></button><button class="r-opt${R.tag==='no'?' sel':''}" data-tag="no"><span class="oi"><svg style="color:#fff"><use href="#i-arrow"/></svg></span><span>No<small>Continue without one</small></span></button></div>${R.tag==='yes'?`<label class="fld" style="margin-top:14px"><span>Bvndle Tag</span><input id="rTag" placeholder="@yourtag" value="${esc(R.tagv)}"></label>`:''}`;
+    F.innerHTML=back+cont();
     const ti=$('#rTag'); if(ti){ti.focus(); ti.addEventListener('input',()=>R.tagv=ti.value);}
-  } else if(R.step===4){ T.textContent='How would you like us to contact you?'; S.textContent='We will respond through the channel that works for you.';
+  } else if(R.step===4){ T.textContent='How would you like us to contact you?'; Sb.textContent='We will respond on the channel you choose.';
     B.innerHTML=`<div class="r-opts" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">${['Phone','WhatsApp','Email'].map(m=>`<button class="r-opt${R.method===m?' sel':''}" data-method="${m}"><span>${m}</span></button>`).join('')}</div>`;
-    F.innerHTML=`${back}<button class="btn btn-go" data-rnext><span class="wheel">${wheelSVG()}</span>Send request</button>`;
-  } else { T.textContent=''; S.textContent=''; B.innerHTML=doneHTML(R.svc,{method:R.method}); F.innerHTML=`<span></span><button class="btn btn-ghost" data-rclose>Close</button>`; }
+    F.innerHTML=back+cont('Send request');
+  } else { T.textContent=''; Sb.textContent=''; B.innerHTML=doneHTML(R.svc,{method:R.method}); F.innerHTML=`<span></span><button class="btn btn-ghost" data-rclose>Close</button>`; }
+  syncSeg(R.el);
 }
 function next(){
   if(R.step===1 && !R.svc) return;
@@ -1273,9 +1524,10 @@ function next(){
   if(R.step===4 && !R.method){ $$('[data-method]').forEach(b=>b.animate([{transform:'translateX(0)'},{transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'none'}],{duration:300})); return; }
   R.step++; rRender(); $('.router-card').scrollTop=0;
 }
-function openRouter(pre){
+function openRouter(pre,vals){
   R.lastFocus=document.activeElement; R.svc=null; R.step=1; R.vals={}; R.tag=null; R.tagv=''; R.method=null;
-  if(pre){ const [k,who]=pre.split(':'); R.svc=k; if(who) R.vals.who=who; R.step=2; }
+  if(pre){ const [k,who]=pre.split(':'); if(FORMS[k]){ R.svc=k; if(who) R.vals.who=who; R.step=2; } }
+  if(vals) Object.assign(R.vals,vals);
   closeDrawer(); R.el.hidden=false; document.body.style.overflow='hidden'; rRender(); setTimeout(()=>$('#rClose').focus(),30);
 }
 function closeRouter(){ R.el.hidden=true; document.body.style.overflow=''; R.lastFocus&&R.lastFocus.focus&&R.lastFocus.focus(); }
@@ -1297,9 +1549,15 @@ function closeDrawer(){ drawer.hidden=true; burger.setAttribute('aria-expanded',
 burger.addEventListener('click',()=>{drawer.hidden=false; burger.setAttribute('aria-expanded','true'); $('#drawerClose').focus();});
 $('#drawerClose').addEventListener('click',closeDrawer);
 
-/* ---------- View routing with wheel wipe ---------- */
+/* ---------- Segmented controls ---------- */
+function syncSeg(root=document){ $$('.seg label',root).forEach(l=>{ const i=l.querySelector('input'); l.classList.toggle('on', !!(i&&i.checked)); }); }
+document.addEventListener('change', e => { if(e.target.closest('.seg')) syncSeg(e.target.closest('.seg')); });
+syncSeg();
+
+/* ---------- Views + wheel wipe ---------- */
 const VIEWS=$$('[data-view]').map(v=>v.dataset.view); let current='home';
-function setView(name){ $$('[data-view]').forEach(v=>v.hidden=v.dataset.view!==name); current=name; $$('.nav a').forEach(a=>a.toggleAttribute('aria-current',a.dataset.go===name)); $$('.nav a[aria-current]').forEach(a=>a.setAttribute('aria-current','page')); scrollTo(0,0); try{ if(name==='home') size(); howUpdate(); }catch(_){} observeReveal(); }
+const navKey = n => n.startsWith('biz-') ? 'business' : n;
+function setView(name){ $$('[data-view]').forEach(v=>v.hidden=v.dataset.view!==name); current=name; $$('.nav a').forEach(a=>{ if(a.dataset.go===navKey(name)) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); }); scrollTo(0,0); try{ if(name==='home') size(); howUpdate(); }catch(_){} observeReveal(); }
 function go(name,x,y){
   if(!VIEWS.includes(name)) name='home';
   closeDrawer();
@@ -1307,45 +1565,33 @@ function go(name,x,y){
   try{ history.replaceState(null,'','#'+name); }catch(_){}
   if(RM || !Element.prototype.animate){ setView(name); return; }
   try {
-  const w=$('#wipe'); const cx=x??innerWidth/2, cy=y??innerHeight/2; const from=`circle(0px at ${cx}px ${cy}px)`, to=`circle(150vmax at ${cx}px ${cy}px)`;
-  $('.wheel',w).animate([{transform:'rotate(0) scale(.4)'},{transform:'rotate(540deg) scale(1)'}],{duration:900,easing:'ease-out'});
-  w.animate([{clipPath:from},{clipPath:to}],{duration:420,easing:'cubic-bezier(.7,0,.3,1)',fill:'forwards'}).onfinish=()=>{
-    setView(name);
-    w.animate([{clipPath:`circle(150vmax at 50% 50%)`},{clipPath:`circle(0px at 50% 50%)`}],{duration:480,delay:120,easing:'cubic-bezier(.7,0,.3,1)',fill:'forwards'});
-  };
+    const w=$('#wipe'); const cx=x??innerWidth/2, cy=y??innerHeight/2;
+    $('.wheel',w).animate([{transform:'rotate(0) scale(.4)'},{transform:'rotate(540deg) scale(1)'}],{duration:900,easing:'ease-out'});
+    w.animate([{clipPath:`circle(0px at ${cx}px ${cy}px)`},{clipPath:`circle(150vmax at ${cx}px ${cy}px)`}],{duration:420,easing:'cubic-bezier(.7,0,.3,1)',fill:'forwards'}).onfinish=()=>{
+      setView(name);
+      w.animate([{clipPath:'circle(150vmax at 50% 50%)'},{clipPath:'circle(0px at 50% 50%)'}],{duration:480,delay:120,easing:'cubic-bezier(.7,0,.3,1)',fill:'forwards'});
+    };
   } catch(e){ setView(name); }
 }
 document.addEventListener('click',e=>{
   const mv=e.target.closest('[data-move]'); if(mv){ e.preventDefault(); return openRouter(mv.dataset.move||''); }
-  const g=e.target.closest('[data-go]'); if(g && !g.closest('#router')){ e.preventDefault(); return go(g.dataset.go,e.clientX,e.clientY); }
-  if(g && g.closest('#router')){ e.preventDefault(); return go(g.dataset.go); }
+  const g=e.target.closest('[data-go]'); if(g){ e.preventDefault(); return g.closest('#router') ? go(g.dataset.go) : go(g.dataset.go,e.clientX,e.clientY); }
   const s=e.target.closest('[data-scroll]'); if(s){ e.preventDefault(); const t=document.getElementById(s.dataset.scroll); t&&t.scrollIntoView({behavior:RM?'auto':'smooth',block:'start'}); }
 });
 
-/* ---------- Reveal ---------- */
+/* ---------- Reveal + touch ---------- */
 let io;
 function observeReveal(){ io&&io.disconnect(); io=new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} }),{rootMargin:'0px 0px -8% 0px'});
   $$('.view:not([hidden]) .rv:not(.in)').forEach(el=>{ const b=el.getBoundingClientRect(); if(b.top<innerHeight) el.classList.add('in'); else io.observe(el); }); }
-
-/* ---------- Segmented controls (no :has() needed) ---------- */
-const syncSeg = (root=document) => $$('.seg label',root).forEach(l=>{ const i=l.querySelector('input'); l.classList.toggle('on', !!(i&&i.checked)); });
-document.addEventListener('change', e => { if(e.target.closest('.seg')) syncSeg(); });
-new MutationObserver(()=>syncSeg()).observe(document.body,{childList:true,subtree:true});
-syncSeg();
-
-/* ---------- Touch: bring hover-only motion to phones ---------- */
 if (TOUCH) {
   document.documentElement.classList.add('touch');
-  safe('touch cards', () => {
-    const tio = new IntersectionObserver(es => es.forEach(en => en.target.classList.toggle('live', en.isIntersecting)), { threshold: .6 });
-    $$('.svc, .corp-item, .card').forEach(el => tio.observe(el));
-  });
+  safe('touch cards', () => { const tio = new IntersectionObserver(es => es.forEach(en => en.target.classList.toggle('live', en.isIntersecting)), { threshold: .6 }); $$('.jc, .uc, .card, .tcard').forEach(el => tio.observe(el)); });
 }
 
 /* ---------- Boot ---------- */
 const start=(location.hash||'').slice(1);
-if(start==='contact') { setView('home'); openRouter(''); }
-else if(VIEWS.includes(start)) setView(start); else setView('home');
+if(start==='contact'){ setView('home'); openRouter(''); }
+else setView(VIEWS.includes(start)?start:'home');
 })();
 </script>
 </body>
