@@ -1662,7 +1662,10 @@ async function submitRequest(key,v){
     const traits={ name:v.name||undefined, email:email||undefined, phone:phone||undefined, bvndle_tag:tag||undefined,
       company:v.company||undefined, preferred_contact:v.method||undefined, bvndlego_last_service:key, acquisition_source:'bvndlego_website' };
     Object.keys(traits).forEach(k=>traits[k]===undefined&&delete traits[k]);
-    cio('identify', traits);
+    // Email-led requests are matched on email. Phone-only requests get a stable phone-based ID,
+    // so the person is identified and event-triggered automations (e.g. the ops alert) still run.
+    const digits=phone.replace(/\D/g,'').replace(/^0/,'234');
+    if(!email && digits) cio('identify', 'bgo-phone-'+digits, traits); else cio('identify', traits);
     const props={ reference:payload.reference, service:key, status:payload.status, guarantor_verification:payload.guarantor_verification,
       bvndle_tag:payload.bvndle_tag, bvndle_tag_requested:payload.bvndle_tag_requested, page:payload.source };
     Object.entries(v).forEach(([k,val])=>{ if(!(k in props) && val!=='' && val!=null) props[k]=val; });

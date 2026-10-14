@@ -20,10 +20,10 @@ Everything is in a single file, `index.html`, with no build step. It is publishe
 
 ## What reaches Customer.io
 - `page` on load and on every section change
-- `identify` on every request, with traits `name`, `email` (or `phone`), `bvndle_tag`, `company`, `preferred_contact`, `bvndlego_last_service`, `acquisition_source: bvndlego_website`. People are matched by email. Phone-only requests stay anonymous profiles until an email or ID is known
+- `identify` on every request, with traits `name`, `email` (or `phone`), `bvndle_tag`, `company`, `preferred_contact`, `bvndlego_last_service`, `acquisition_source: bvndlego_website`. People are matched by email. Phone-only requests are identified as `bgo-phone-<digits>`, so automations still run for them
 - `track` **`BvndleGo Request Submitted`**, with properties `reference`, `service` (car/bus/charge/biz), `status` (`new` / `on_hold_guarantor`), `guarantor_verification`, `bvndle_tag`, `bvndle_tag_requested`, plus every form field (pickup and coordinates, vehicle, guarantor details, contact method…)
 
-Build Customer.io automations on that event, for example: alert the ops team, send the guarantor confirmation SMS or email when `guarantor_verification = guarantor_direct`, or notify the admin queue when it is `admin_tag_review`.
+**Live in Staging:** the automation *BvndleGo · New request alert to ops* (id 64) emails Rukiyat@bvndle.com the full details of every request. Build more automations on the same event, for example: alert the ops team, send the guarantor confirmation SMS or email when `guarantor_verification = guarantor_direct`, or notify the admin queue when it is `admin_tag_review`.
 
 ## Request payload (POST to `submitUrl`)
 
