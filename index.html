@@ -1197,7 +1197,11 @@ const CONFIG = {
   // Latest end time for trips with a driver (24-hour HH:MM)
   chauffeurLatestEnd: '21:00',
 
-  // Where requests are sent: an HTTPS endpoint that accepts a JSON POST (CRM webhook, Zapier, your API).
+  // Customer.io (Data Pipelines JavaScript source "BvndleGo Website"). Browser write keys are public by design.
+  // Staging workspace: source 95651. To go live, swap in the Production workspace's website source key.
+  customerio: { writeKey: 'fa1e024b6c061b48e452', edgeUrl: 'https://cdp-eu.customer.io', workspace: 'staging' },
+
+  // Optional extra destination: an HTTPS endpoint that accepts a JSON POST (CRM webhook, Zapier, your API).
   submitUrl: '',
   // Optional: GET endpoint that answers {available:true|false} for ?tag=@name, for new Bvndle Tags
   tagCheckUrl: ''
@@ -1213,6 +1217,19 @@ if (window.CanvasRenderingContext2D && !CanvasRenderingContext2D.prototype.round
   CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) { r = Math.min(+r || 0, w / 2, h / 2); this.moveTo(x + r, y); this.arcTo(x + w, y, x + w, y + h, r); this.arcTo(x + w, y + h, x, y + h, r); this.arcTo(x, y + h, x, y, r); this.arcTo(x, y, x + w, y, r); this.closePath(); return this; };
 }
 let size = () => {}, howUpdate = () => {};
+
+/* ---------- Customer.io (canonical browser snippet; placeholders filled from CONFIG) ---------- */
+const CIO_KEY = CONFIG.customerio && CONFIG.customerio.writeKey;
+if (CIO_KEY) safe('Customer.io', () => {
+  !function(){var i="cioanalytics", analytics=(window[i]=window[i]||[]);if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.setAttribute('data-global-customerio-analytics-key', i);t.src=CONFIG.customerio.edgeUrl+"/v1/analytics-js/snippet/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._writeKey=key;analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.15.3";
+    analytics.load(
+      CIO_KEY,
+    );
+    analytics.page();
+  }}();
+});
+const cio = (method, ...args) => { try { const a = window.cioanalytics; if (CIO_KEY && a && a[method]) a[method](...args); } catch (e) { console.warn('[BvndleGo] Customer.io', e); } };
+let cioLastView = null;
 const debounce=(fn,ms)=>{let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),ms);};};
 
 /* ---------- Wheel ---------- */
@@ -1639,7 +1656,19 @@ async function submitRequest(key,v){
     guarantor_verification: key==='car'&&v.drive==='Self-drive' ? (v.gmethod===GTAG?'admin_tag_review':'guarantor_direct') : null,
     bvndle_tag: v.tagmode==='I have one'?atTag(v.tag):null, bvndle_tag_requested: v.tagmode==='Create one for me'?atTag(v.newtag):null,
     submitted_at:new Date().toISOString(), source:location.href, fields:v};
-  if(!CONFIG.submitUrl){ console.info('[BvndleGo] request (no submitUrl set)', payload); return true; }
+  if(CIO_KEY){
+    const c=String(v.contact||'').trim(); const email=(/@/.test(c)?c:(v.email||'')).trim().toLowerCase(); const phone=/@/.test(c)?'':c;
+    const tag=payload.bvndle_tag||payload.bvndle_tag_requested;
+    const traits={ name:v.name||undefined, email:email||undefined, phone:phone||undefined, bvndle_tag:tag||undefined,
+      company:v.company||undefined, preferred_contact:v.method||undefined, bvndlego_last_service:key, acquisition_source:'bvndlego_website' };
+    Object.keys(traits).forEach(k=>traits[k]===undefined&&delete traits[k]);
+    cio('identify', traits);
+    const props={ reference:payload.reference, service:key, status:payload.status, guarantor_verification:payload.guarantor_verification,
+      bvndle_tag:payload.bvndle_tag, bvndle_tag_requested:payload.bvndle_tag_requested, page:payload.source };
+    Object.entries(v).forEach(([k,val])=>{ if(!(k in props) && val!=='' && val!=null) props[k]=val; });
+    cio('track', 'BvndleGo Request Submitted', props);
+  }
+  if(!CONFIG.submitUrl) return true;
   try{ const r=await fetch(CONFIG.submitUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}); return r.ok; }catch(e){ console.warn(e); return false; }
 }
 async function finish(box,key,v){
@@ -1847,7 +1876,7 @@ syncSeg();
 /* ---------- Views + wheel wipe ---------- */
 const VIEWS=$$('[data-view]').map(v=>v.dataset.view); let current='home';
 const navKey = n => n.startsWith('biz-') ? 'business' : n;
-function setView(name){ $$('[data-view]').forEach(v=>v.hidden=v.dataset.view!==name); current=name; $$('.nav a').forEach(a=>{ if(a.dataset.go===navKey(name)) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); }); scrollTo(0,0); try{ if(name==='home') size(); howUpdate(); }catch(_){} observeReveal(); }
+function setView(name){ if(cioLastView!==null && cioLastView!==name){ cio('page', name, {view:name}); } cioLastView=name; $$('[data-view]').forEach(v=>v.hidden=v.dataset.view!==name); current=name; $$('.nav a').forEach(a=>{ if(a.dataset.go===navKey(name)) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); }); scrollTo(0,0); try{ if(name==='home') size(); howUpdate(); }catch(_){} observeReveal(); }
 function go(name,x,y){
   if(!VIEWS.includes(name)) name='home';
   closeDrawer();

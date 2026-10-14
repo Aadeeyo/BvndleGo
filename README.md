@@ -14,8 +14,16 @@ Everything is in a single file, `index.html`, with no build step. It is publishe
 | `mapRegion`, `mapCenter` | Bias address search to Nigeria and centre the map on Lagos |
 | `vehicleTypes` | Options in the GoCar vehicle type dropdown |
 | `chauffeurLatestEnd` | Latest end time for trips with a driver (default `21:00`) |
-| `submitUrl` | HTTPS endpoint that receives each request as a JSON POST (CRM webhook, Zapier, or your API). When empty, forms show the confirmation but nothing is sent |
+| `customerio` | Customer.io Data Pipelines JavaScript source (EU). Currently the **Staging** workspace source "BvndleGo Website" (id 95651). For go-live, create the same source in Production and swap `writeKey` |
+| `submitUrl` | Optional extra HTTPS endpoint that also receives each request as a JSON POST |
 | `tagCheckUrl` | Optional GET endpoint, `?tag=@name` → `{"available": true}`, for live Bvndle Tag availability |
+
+## What reaches Customer.io
+- `page` on load and on every section change
+- `identify` on every request, with traits `name`, `email` (or `phone`), `bvndle_tag`, `company`, `preferred_contact`, `bvndlego_last_service`, `acquisition_source: bvndlego_website`. People are matched by email. Phone-only requests stay anonymous profiles until an email or ID is known
+- `track` **`BvndleGo Request Submitted`**, with properties `reference`, `service` (car/bus/charge/biz), `status` (`new` / `on_hold_guarantor`), `guarantor_verification`, `bvndle_tag`, `bvndle_tag_requested`, plus every form field (pickup and coordinates, vehicle, guarantor details, contact method…)
+
+Build Customer.io automations on that event, for example: alert the ops team, send the guarantor confirmation SMS or email when `guarantor_verification = guarantor_direct`, or notify the admin queue when it is `admin_tag_review`.
 
 ## Request payload (POST to `submitUrl`)
 
