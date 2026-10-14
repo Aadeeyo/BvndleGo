@@ -1,26 +1,44 @@
 # BvndleGo
 
-Website for BvndleGo: GoCar, GoBus and GoCharge. **Move Better.**
+Website for BvndleGo: GoCar, GoBus and GoCharge. **Move smarter with BvndleGo.**
 
-Everything is in a single file, `index.html`, with no build step. It is published with GitHub Pages.
+Everything is in a single file, `index.html`, with no build step. It is published with GitHub Pages. The brand follows the BvndleGo CI v1.0: the GO logo, GoCore Purple `#4A2467`, GoCore Pink `#E93C8E`, and DM Sans and Onest type.
 
-## Fill in before launch
-Near the top of the `<script>` in `index.html` there is a `CONFIG` block:
+## Settings (`CONFIG` at the top of the `<script>` in `index.html`)
 
-```js
-const CONFIG = {
-  coverage: 'Starting in Lagos',
-  support: { phone: '', whatsapp: '', email: '', hours: '' }
-};
+| Key | What it does |
+|---|---|
+| `coverage` | Service-area line shown across the site |
+| `support` | Phone, WhatsApp, email and hours for the Contact & support panel. When empty, the panel sends people to the request form |
+| `googleMapsKey` | **Required for address search and drop-a-pin.** Use a browser key with *Maps JavaScript API*, *Places API (New)* and *Geocoding API* enabled, restricted to your domain (e.g. `aadeeyo.github.io/*`, `bvndlego.com/*`). Without it, people type addresses or share their device location |
+| `mapRegion`, `mapCenter` | Bias address search to Nigeria and centre the map on Lagos |
+| `vehicleTypes` | Options in the GoCar vehicle type dropdown |
+| `chauffeurLatestEnd` | Latest end time for trips with a driver (default `21:00`) |
+| `submitUrl` | HTTPS endpoint that receives each request as a JSON POST (CRM webhook, Zapier, or your API). When empty, forms show the confirmation but nothing is sent |
+| `tagCheckUrl` | Optional GET endpoint, `?tag=@name` → `{"available": true}`, for live Bvndle Tag availability |
+
+## Request payload (POST to `submitUrl`)
+
+```json
+{
+  "reference": "BGO-XXXXXX",
+  "service": "car | bus | charge | biz",
+  "status": "new | on_hold_guarantor",
+  "guarantor_verification": "guarantor_direct | admin_tag_review | null",
+  "bvndle_tag": "@existing or null",
+  "bvndle_tag_requested": "@newtag or null",
+  "submitted_at": "ISO date",
+  "source": "page URL",
+  "fields": { "pickup": "...", "pickup_lat": 6.6, "pickup_lng": 3.35, "drive": "Self-drive", "vehicle": "SUV", "gname": "...", "gphone": "...", "gchannel": "SMS", "gtag": "...", "method": "WhatsApp", "...": "..." }
+}
 ```
 
-- **support**: add verified phone, WhatsApp, email and support hours. They appear automatically in the "Contact & support" panel. While these are empty, the panel sends people to the request form instead.
-- **coverage**: update it as cities and routes go live.
+## Backend work needed for the new booking rules
+- **Self-drive guarantor, direct confirmation**: when `guarantor_verification` is `guarantor_direct`, send the guarantor (`gname`, `gphone`, `gemail`) a confirmation link by `gchannel`, then move the booking from `on_hold_guarantor` to confirmable once they accept.
+- **Self-drive guarantor, company or guarantor Tag**: when it is `admin_tag_review`, show the booking in the BvndleGo admin queue with `gtag` for approval.
+- A self-drive booking must not be confirmed while it is `on_hold_guarantor`. The website shows the hold state, but the backend has to enforce it.
+- **Bvndle Tag creation**: create the Tag in `bvndle_tag_requested` for the customer, using the contact details on the request.
+- **9:00 PM limit for trips with a driver**: the form enforces it. Enforce it on the server too.
 
 ## Still needed from the business
-- **Forms**: connect the request flow and the forms on each page to the CRM or a form endpoint. They are front-end only at the moment.
-- **Indicative prices, deposits, rental requirements, cancellation and refund terms**: the FAQs currently say these are "shared with your quote".
-- **Verified charging locations** (address, hours, connectors, pricing) and **GoBus routes** (stops, times, fares).
-- **Bvndle Coins**: earning rates, expiry and eligibility rules.
-- **Trust proof**: insurance, driver vetting, vehicle standards, customer feedback and client logos.
-- **Response-time commitment**: the confirmation screen currently says "the team will contact you".
+Prices, deposits, rental terms, verified charging locations and GoBus routes, Coins earning rules, trust proof (insurance, vetting, client logos), and support contact details.
